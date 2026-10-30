@@ -1,0 +1,74 @@
+{
+  "triviaqa@T=0.0": {
+    "n": 7822,
+    "correct": 5405,
+    "abstained": 2,
+    "accuracy": 0.6909997443109179
+  },
+  "popqa@T=0.0": {
+    "n": 8000,
+    "correct": 2024,
+    "abstained": 9,
+    "accuracy": 0.253
+  },
+  "nq(ood)@T=0.0": {
+    "n": 2000,
+    "correct": 548,
+    "abstained": 1,
+    "accuracy": 0.274
+  },
+  "sciq(ood)@T=0.0": {
+    "n": 1000,
+    "correct": 501,
+    "abstained": 0,
+    "accuracy": 0.501
+  },
+  "hotpotqa(ood)@T=0.0": {
+    "n": 2000,
+    "correct": 464,
+    "abstained": 2,
+    "accuracy": 0.232
+  },
+  "2wikimultihopqa(ood)@T=0.0": {
+    "n": 2000,
+    "correct": 623,
+    "abstained": 4,
+    "accuracy": 0.3115
+  },
+  "triviaqa@T=0.7": {
+    "n": 7822,
+    "correct": 5404,
+    "abstained": 0,
+    "accuracy": 0.6908718997698798
+  },
+  "popqa@T=0.7": {
+    "n": 8000,
+    "correct": 1995,
+    "abstained": 7,
+    "accuracy": 0.249375
+  },
+  "nq(ood)@T=0.7": {
+    "n": 2000,
+    "correct": 528,
+    "abstained": 0,
+    "accuracy": 0.264
+  },
+  "sciq(ood)@T=0.7": {
+    "n": 1000,
+    "correct": 495,
+    "abstained": 0,
+    "accuracy": 0.495
+  },
+  "hotpotqa(ood)@T=0.7": {
+    "n": 2000,
+    "correct": 458,
+    "abstained": 1,
+    "accuracy": 0.229
+  },
+  "2wikimultihopqa(ood)@T=0.7": {
+    "n": 2000,
+    "correct": 617,
+    "abstained": 3,
+    "accuracy": 0.3085
+  }
+}

@@ -1,0 +1,16 @@
+{"mode": "vanilla", "batch_size": 1, "in_len": 512, "out_len": 256, "median_s": 4.970627622213215, "output_tok_per_s": 51.50255047390048, "ms_per_step": 19.41651414927037}
+{"mode": "vanilla", "batch_size": 16, "in_len": 512, "out_len": 256, "median_s": 6.0181581526994705, "output_tok_per_s": 680.6069059788204, "ms_per_step": 23.508430283982307}
+{"mode": "vanilla", "batch_size": 64, "in_len": 512, "out_len": 256, "median_s": 9.511161375790834, "output_tok_per_s": 1722.6077187274832, "ms_per_step": 37.15297412418295}
+{"mode": "vanilla", "batch_size": 256, "in_len": 512, "out_len": 256, "median_s": 26.40700558759272, "output_tok_per_s": 2481.7656732269547, "ms_per_step": 103.15236557653407}
+{"mode": "observe-torch", "batch_size": 1, "in_len": 512, "out_len": 256, "median_s": 5.103530346881598, "output_tok_per_s": 50.16135549314863, "ms_per_step": 19.935665417506243}
+{"mode": "observe-torch", "batch_size": 16, "in_len": 512, "out_len": 256, "median_s": 6.189944721758366, "output_tok_per_s": 661.7183487280735, "ms_per_step": 24.179471569368616}
+{"mode": "observe-torch", "batch_size": 64, "in_len": 512, "out_len": 256, "median_s": 9.744674922898412, "output_tok_per_s": 1681.3285337513155, "ms_per_step": 38.06513641757192}
+{"mode": "observe-torch", "batch_size": 256, "in_len": 512, "out_len": 256, "median_s": 26.90065433178097, "output_tok_per_s": 2436.2232677208326, "ms_per_step": 105.08068098351941}
+{"mode": "observe-triton", "batch_size": 1, "in_len": 512, "out_len": 256, "median_s": 5.09362528193742, "output_tok_per_s": 50.258899277064096, "ms_per_step": 19.89697375756805}
+{"mode": "observe-triton", "batch_size": 16, "in_len": 512, "out_len": 256, "median_s": 6.171634923201054, "output_tok_per_s": 663.6815124306671, "ms_per_step": 24.10794891875412}
+{"mode": "observe-triton", "batch_size": 64, "in_len": 512, "out_len": 256, "median_s": 9.739318966399878, "output_tok_per_s": 1682.2531489649236, "ms_per_step": 38.044214712499524}
+{"mode": "observe-triton", "batch_size": 256, "in_len": 512, "out_len": 256, "median_s": 26.876896465662867, "output_tok_per_s": 2438.376770313748, "ms_per_step": 104.98787681899557}
+{"mode": "rollback-forced", "batch_size": 1, "in_len": 512, "out_len": 256, "median_s": 5.8044065297581255, "output_tok_per_s": 44.10442285314356, "ms_per_step": 22.673463006867678}
+{"mode": "rollback-forced", "batch_size": 16, "in_len": 512, "out_len": 256, "median_s": 6.926553091034293, "output_tok_per_s": 591.3475210782472, "ms_per_step": 27.056848011852708}
+{"mode": "rollback-forced", "batch_size": 64, "in_len": 512, "out_len": 256, "median_s": 10.622523247264326, "output_tok_per_s": 1542.38306837497, "ms_per_step": 41.49423143462627}
+{"mode": "rollback-forced", "batch_size": 256, "in_len": 512, "out_len": 256, "median_s": 28.66771171381697, "output_tok_per_s": 2286.0561964006924, "ms_per_step": 111.98324888209754}

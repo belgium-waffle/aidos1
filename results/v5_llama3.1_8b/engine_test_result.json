@@ -1,0 +1,94 @@
+{
+  "pass": true,
+  "checks": {
+    "observe==vanilla": {
+      "exact": 24,
+      "n": 24,
+      "rate": 1.0,
+      "first_divergence": [],
+      "ref_margin_at_divergence": [],
+      "unexplained": [],
+      "pass": true
+    },
+    "prefill-insert==ref": {
+      "exact": 23,
+      "n": 24,
+      "rate": 0.9583333333333334,
+      "first_divergence": [
+        2
+      ],
+      "ref_margin_at_divergence": [
+        0.125
+      ],
+      "unexplained": [],
+      "pass": true
+    },
+    "mid-insert==ref": {
+      "exact": 24,
+      "n": 24,
+      "rate": 1.0,
+      "first_divergence": [],
+      "ref_margin_at_divergence": [],
+      "unexplained": [],
+      "pass": true,
+      "n_finished_before_insert": 2
+    },
+    "mid-insert-delayed==ref": {
+      "exact": 24,
+      "n": 24,
+      "rate": 1.0,
+      "first_divergence": [],
+      "ref_margin_at_divergence": [],
+      "unexplained": [],
+      "pass": true,
+      "n_finished_before_insert": 2
+    },
+    "mid-insert-recompute==ref": {
+      "exact": 24,
+      "n": 24,
+      "rate": 1.0,
+      "first_divergence": [],
+      "ref_margin_at_divergence": [],
+      "unexplained": [],
+      "pass": true,
+      "n_finished_before_insert": 2
+    },
+    "rewind-insert==prefill-ref": {
+      "exact": 23,
+      "n": 24,
+      "rate": 0.9583333333333334,
+      "first_divergence": [
+        2
+      ],
+      "ref_margin_at_divergence": [
+        0.125
+      ],
+      "unexplained": [],
+      "pass": true,
+      "n_finished_before_insert": 2
+    },
+    "retry-insert==ref": {
+      "exact": 23,
+      "n": 24,
+      "rate": 0.9583333333333334,
+      "first_divergence": [
+        1
+      ],
+      "ref_margin_at_divergence": [
+        0.1875
+      ],
+      "unexplained": [],
+      "pass": true
+    },
+    "forced-rollback-completes": {
+      "pass": true,
+      "n": 24
+    },
+    "delayed_wall_s": {
+      "pass": true,
+      "wall_s": 7.793352948967367,
+      "undelayed_wall_s": 1.2346000410616398,
+      "serial_delay_lower_bound_s": 7.199999999999999
+    }
+  }
+}

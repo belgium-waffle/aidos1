@@ -1,0 +1,26 @@
+{
+  "triviaqa@T=0.0": {
+    "n": 8000,
+    "correct": 5778,
+    "abstained": 2,
+    "accuracy": 0.72225
+  },
+  "popqa@T=0.0": {
+    "n": 8000,
+    "correct": 1854,
+    "abstained": 10,
+    "accuracy": 0.23175
+  },
+  "triviaqa@T=0.7": {
+    "n": 8000,
+    "correct": 5744,
+    "abstained": 3,
+    "accuracy": 0.718
+  },
+  "popqa@T=0.7": {
+    "n": 8000,
+    "correct": 1844,
+    "abstained": 9,
+    "accuracy": 0.2305
+  }
+}

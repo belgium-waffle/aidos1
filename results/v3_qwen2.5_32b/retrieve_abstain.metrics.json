@@ -1,0 +1,47 @@
+{
+  "mode": "retrieve+abstain",
+  "n": 3000,
+  "split": "test",
+  "accuracy": 0.6013333333333334,
+  "accuracy_ci": [
+    0.5833333333333334,
+    0.621
+  ],
+  "coverage": 0.7006666666666667,
+  "hallucination_rate": 0.09933333333333333,
+  "hallucination_rate_ci": [
+    0.08865833333333334,
+    0.11033333333333334
+  ],
+  "selective_error": 0.14176974310180782,
+  "mean_rollbacks": 0.0,
+  "frac_rolled_back": 0.0,
+  "retrieval_rate": 0.6986666666666667,
+  "retrieval_ms_p50": 73.11500000000001,
+  "retrieval_ms_p95": 144.23,
+  "wall_s": 120.69181164493784,
+  "output_tok_per_s": 79.7154327942639,
+  "questions_per_s": 24.856698719757997,
+  "by_dataset": {
+    "popqa": {
+      "n": 1500,
+      "accuracy": 0.376,
+      "hallucination_rate": 0.10266666666666667,
+      "coverage": 0.4786666666666667,
+      "retrieval_rate": 0.8986666666666666
+    },
+    "triviaqa": {
+      "n": 1500,
+      "accuracy": 0.8266666666666667,
+      "hallucination_rate": 0.096,
+      "coverage": 0.9226666666666666,
+      "retrieval_rate": 0.49866666666666665
+    }
+  },
+  "reasons": {
+    "gap": 964,
+    "post": 1132,
+    "post-after-retrieval": 427,
+    "pre-after-retrieval": 471
+  }
+}

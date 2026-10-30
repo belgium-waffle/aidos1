@@ -1,0 +1,102 @@
+{
+  "calibration": {
+    "n_sentences": {
+      "val": 26,
+      "test": 39
+    },
+    "unsupported_rate": {
+      "val": 0.7307692307692307,
+      "test": 0.7948717948717948
+    },
+    "auroc": {
+      "tripwire": {
+        "val": 0.8421052631578947,
+        "test": 0.8629032258064516
+      },
+      "flare": {
+        "val": 0.42105263157894735,
+        "test": 0.18548387096774194
+      }
+    },
+    "tau": 0.45123500000000005,
+    "flare_theta": 0.6021055722239754
+  },
+  "arms": {
+    "vanilla": {
+      "n": 40,
+      "responded": 1.0,
+      "factscore": 0.43292291224857016,
+      "factscore_lp": 0.3374185936120902,
+      "facts_per_answer": 10.075,
+      "supported_per_answer": 5.175,
+      "unsupported_per_answer": 4.9,
+      "prefill_per_answer": 38.75,
+      "decode_per_answer": 100.275,
+      "retrievals_per_answer": 0.0,
+      "wall_s": 0.7267022407613695,
+      "answers_per_s": 55.043176911208924,
+      "factscore_by_popularity": {
+        "rare": 0.32769794308255845,
+        "medium": 0.27200854700854704,
+        "frequent": 0.680052294197031
+      }
+    },
+    "rag (always, up front)": {
+      "n": 40,
+      "responded": 0.975,
+      "factscore": 0.8935352790109875,
+      "factscore_lp": 0.7845933351327102,
+      "facts_per_answer": 11.575,
+      "supported_per_answer": 10.35,
+      "unsupported_per_answer": 1.225,
+      "prefill_per_answer": 439.0,
+      "decode_per_answer": 143.375,
+      "retrievals_per_answer": 1.0,
+      "wall_s": 3.221616289112717,
+      "answers_per_s": 12.416127934036682,
+      "factscore_by_popularity": {
+        "rare": 0.9083352544891006,
+        "medium": 0.9184182837143364,
+        "frequent": 0.8584641548927264
+      }
+    },
+    "flare": {
+      "n": 40,
+      "responded": 0.975,
+      "factscore": 0.7941520301516729,
+      "factscore_lp": 0.7182840808329655,
+      "facts_per_answer": 12.45,
+      "supported_per_answer": 9.725,
+      "unsupported_per_answer": 2.725,
+      "prefill_per_answer": 1310.1,
+      "decode_per_answer": 222.8,
+      "retrievals_per_answer": 2.925,
+      "wall_s": 9.080704422667623,
+      "answers_per_s": 4.404944609820179,
+      "factscore_by_popularity": {
+        "rare": 0.7224901732254673,
+        "medium": 0.8383267195767196,
+        "frequent": 0.8228311635045383
+      }
+    },
+    "tripwire lf-retrieve": {
+      "n": 40,
+      "responded": 1.0,
+      "factscore": 0.9330405778432095,
+      "factscore_lp": 0.5828527769318435,
+      "facts_per_answer": 8.125,
+      "supported_per_answer": 7.45,
+      "unsupported_per_answer": 0.675,
+      "prefill_per_answer": 1277.8,
+      "decode_per_answer": 104.45,
+      "retrievals_per_answer": 2.375,
+      "wall_s": 24.951758611015975,
+      "answers_per_s": 1.6030934181264627,
+      "factscore_by_popularity": {
+        "rare": 0.9373767258382644,
+        "medium": 0.9743589743589743,
+        "frequent": 0.8906470722260196
+      }
+    }
+  }
+}

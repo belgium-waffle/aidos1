@@ -1,0 +1,12 @@
+{"mode": "vanilla", "batch_size": 1, "in_len": 512, "out_len": 128, "median_s": 0.29092573234811425, "output_tok_per_s": 439.97483126325346, "ms_per_step": 2.2728572839696426}
+{"mode": "vanilla", "batch_size": 16, "in_len": 512, "out_len": 128, "median_s": 0.3410343029536307, "output_tok_per_s": 6005.261002376233, "ms_per_step": 2.6643304918252397}
+{"mode": "vanilla", "batch_size": 64, "in_len": 512, "out_len": 128, "median_s": 0.5135359987616539, "output_tok_per_s": 15952.14360775929, "ms_per_step": 4.011999990325421}
+{"mode": "observe-torch", "batch_size": 1, "in_len": 512, "out_len": 128, "median_s": 0.34753273567184806, "output_tok_per_s": 368.3106276378575, "ms_per_step": 2.715099497436313}
+{"mode": "observe-torch", "batch_size": 16, "in_len": 512, "out_len": 128, "median_s": 0.42540739476680756, "output_tok_per_s": 4814.208744825974, "ms_per_step": 3.323495271615684}
+{"mode": "observe-torch", "batch_size": 64, "in_len": 512, "out_len": 128, "median_s": 0.6486380212008953, "output_tok_per_s": 12629.540255492955, "ms_per_step": 5.067484540631995}
+{"mode": "observe-triton", "batch_size": 1, "in_len": 512, "out_len": 128, "median_s": 0.34251551888883114, "output_tok_per_s": 373.7056948988768, "ms_per_step": 2.6759024913189933}
+{"mode": "observe-triton", "batch_size": 16, "in_len": 512, "out_len": 128, "median_s": 0.4173269961029291, "output_tok_per_s": 4907.4227623052775, "ms_per_step": 3.2603671570541337}
+{"mode": "observe-triton", "batch_size": 64, "in_len": 512, "out_len": 128, "median_s": 0.6436186851933599, "output_tok_per_s": 12728.033210438738, "ms_per_step": 5.028270978073124}
+{"mode": "rollback-forced", "batch_size": 1, "in_len": 512, "out_len": 128, "median_s": 0.39323826925829053, "output_tok_per_s": 325.50239894359265, "ms_per_step": 3.0721739785803948}
+{"mode": "rollback-forced", "batch_size": 16, "in_len": 512, "out_len": 128, "median_s": 0.4721460151486099, "output_tok_per_s": 4337.641183639734, "ms_per_step": 3.6886407433485147}
+{"mode": "rollback-forced", "batch_size": 64, "in_len": 512, "out_len": 128, "median_s": 0.7133322157897055, "output_tok_per_s": 11484.130141144571, "ms_per_step": 5.572907935857074}

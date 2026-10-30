@@ -1,0 +1,74 @@
+{
+  "layers": [
+    30,
+    40,
+    70
+  ],
+  "n_rows": {
+    "train": 268064,
+    "val": 32180,
+    "test": 116462
+  },
+  "heads": {
+    "post (short-form, zero-shot)": {
+      "longform": {
+        "auroc": 0.6619300292546932,
+        "auroc_ci": [
+          0.6485645566975075,
+          0.6764731342936285
+        ],
+        "n_entities": 20319,
+        "base_rate": 0.2059648604754171,
+        "by_source_model": {
+          "Llama-3.3-70B-Instruct": 0.7133660457035351,
+          "Meta-Llama-3.1-8B-Instruct": 0.6628301897460253,
+          "Mistral-Small-24B-Instruct-2501": 0.6247381442699995,
+          "Qwen2.5-7B-Instruct": 0.6670699599750415,
+          "gemma-2-9b-it": 0.6244946149505655
+        },
+        "token_auroc": 0.6141076658424356
+      },
+      "shortform_auroc": 0.8875844791931845
+    },
+    "post_lf": {
+      "longform": {
+        "auroc": 0.8480257191896007,
+        "auroc_ci": [
+          0.8389519567172263,
+          0.8568336339724024
+        ],
+        "n_entities": 20319,
+        "base_rate": 0.2059648604754171,
+        "by_source_model": {
+          "Llama-3.3-70B-Instruct": 0.837351330067136,
+          "Meta-Llama-3.1-8B-Instruct": 0.8332657688219464,
+          "Mistral-Small-24B-Instruct-2501": 0.8505893166089965,
+          "Qwen2.5-7B-Instruct": 0.8677599550881749,
+          "gemma-2-9b-it": 0.8436989401633915
+        },
+        "token_auroc": 0.8095728674812068
+      },
+      "shortform_auroc": 0.8186968844701262
+    },
+    "post_mix": {
+      "longform": {
+        "auroc": 0.8366190990952564,
+        "auroc_ci": [
+          0.827573646796347,
+          0.8456837650230399
+        ],
+        "n_entities": 20319,
+        "base_rate": 0.2059648604754171,
+        "by_source_model": {
+          "Llama-3.3-70B-Instruct": 0.835354273720303,
+          "Meta-Llama-3.1-8B-Instruct": 0.8315082434357827,
+          "Mistral-Small-24B-Instruct-2501": 0.8440699562309559,
+          "Qwen2.5-7B-Instruct": 0.8485172841197131,
+          "gemma-2-9b-it": 0.8184729275532985
+        },
+        "token_auroc": 0.7920750524853707
+      },
+      "shortform_auroc": 0.8954293182032174
+    }
+  }
+}

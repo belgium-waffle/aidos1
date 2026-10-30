@@ -1,0 +1,63 @@
+{
+  "mode": "route-eu-gain",
+  "n": 3000,
+  "split": "test",
+  "accuracy": 0.51,
+  "accuracy_ci": [
+    0.491325,
+    0.5286666666666666
+  ],
+  "coverage": 0.564,
+  "hallucination_rate": 0.054,
+  "hallucination_rate_ci": [
+    0.046,
+    0.06166666666666667
+  ],
+  "selective_error": 0.09574468085106383,
+  "lam": 1.0,
+  "utility": 0.456,
+  "utility_ci": [
+    0.43266666666666664,
+    0.4780083333333333
+  ],
+  "evidence_hit_rate": 0.8317757009345794,
+  "acc_given_evidence_hit": 0.8616573033707865,
+  "halluc_given_evidence_hit": 0.04845505617977528,
+  "acc_given_evidence_miss": 0.21180555555555555,
+  "abstain_given_evidence_miss": 0.5381944444444444,
+  "mean_rollbacks": 0.0,
+  "frac_rolled_back": 0.0,
+  "retrieval_rate": 0.5706666666666667,
+  "retry_rate": 0.0,
+  "mean_retrievals": 0.5706666666666667,
+  "retrieval_ms_p50": 126.565,
+  "retrieval_ms_p95": 1981.387,
+  "prefill_tokens_per_q": 331.1793333333333,
+  "decode_tokens_per_q": 3.499,
+  "wall_s": 99.71626146277413,
+  "output_tok_per_s": 82.6244373699847,
+  "questions_per_s": 30.085363771083156,
+  "by_dataset": {
+    "popqa": {
+      "n": 1500,
+      "accuracy": 0.27,
+      "hallucination_rate": 0.04,
+      "coverage": 0.31,
+      "retrieval_rate": 0.402
+    },
+    "triviaqa": {
+      "n": 1500,
+      "accuracy": 0.75,
+      "hallucination_rate": 0.068,
+      "coverage": 0.818,
+      "retrieval_rate": 0.7393333333333333
+    }
+  },
+  "reasons": {
+    "eu-abstain": 1024,
+    "eu-post": 141,
+    "eu-post-after-retrieval": 104,
+    "eu-pre-after-retrieval": 179,
+    "eu-retrieve": 1572
+  }
+}

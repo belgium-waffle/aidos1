@@ -1,0 +1,457 @@
+{
+  "calibration": {
+    "n_sentences": {
+      "val": 1471,
+      "test": 4026
+    },
+    "unsupported_rate": {
+      "val": 0.8436437797416724,
+      "test": 0.8700943864878291
+    },
+    "auroc": {
+      "tripwire": {
+        "val": 0.6935973793924955,
+        "test": 0.6979330472815162
+      },
+      "flare": {
+        "val": 0.6957958168377536,
+        "test": 0.6724359180795046
+      }
+    },
+    "tau": 0.70262,
+    "flare_theta": 0.3151647986301169
+  },
+  "arms": {
+    "vanilla": {
+      "n": 400,
+      "responded": 0.96,
+      "factscore": 0.27652625870005637,
+      "factscore_lp": 0.26958047473245994,
+      "facts_per_answer": 31.96,
+      "supported_per_answer": 10.075,
+      "unsupported_per_answer": 21.885,
+      "prefill_per_answer": 52.37,
+      "decode_per_answer": 303.69,
+      "retrievals_per_answer": 0.0,
+      "resamples_per_answer": 0.0,
+      "wall_s": 9.17635202081874,
+      "answers_per_s": 43.590306811737904,
+      "bridge_acc": 0.275,
+      "factscore_by_popularity": {
+        "rare": 0.22543332235315985,
+        "medium": 0.26423362260498645,
+        "frequent": 0.341417705744897
+      }
+    },
+    "rag (always, up front)": {
+      "n": 400,
+      "responded": 0.9925,
+      "factscore": 0.3321675517667107,
+      "factscore_lp": 0.3101132363716445,
+      "facts_per_answer": 25.535,
+      "supported_per_answer": 9.345,
+      "unsupported_per_answer": 16.19,
+      "prefill_per_answer": 435.3225,
+      "decode_per_answer": 283.8775,
+      "retrievals_per_answer": 1.0,
+      "resamples_per_answer": 0.0,
+      "wall_s": 23.75365586252883,
+      "answers_per_s": 16.83951313915414,
+      "bridge_acc": 0.3025,
+      "factscore_by_popularity": {
+        "rare": 0.3378688470118598,
+        "medium": 0.29015223150974,
+        "frequent": 0.3685673105416171
+      }
+    },
+    "flare": {
+      "n": 400,
+      "responded": 0.9975,
+      "factscore": 0.36423560336414634,
+      "factscore_lp": 0.33182711655160496,
+      "facts_per_answer": 29.295,
+      "supported_per_answer": 11.3,
+      "unsupported_per_answer": 17.995,
+      "prefill_per_answer": 1590.6875,
+      "decode_per_answer": 356.6675,
+      "retrievals_per_answer": 2.9075,
+      "resamples_per_answer": 0.0,
+      "wall_s": 103.84519898798317,
+      "answers_per_s": 3.8518872696877153,
+      "bridge_acc": 0.39,
+      "factscore_by_popularity": {
+        "rare": 0.3385665538993352,
+        "medium": 0.33736907872578925,
+        "frequent": 0.41677117746731474
+      }
+    },
+    "tripwire lf-retrieve": {
+      "n": 400,
+      "responded": 0.995,
+      "factscore": 0.3962195664593772,
+      "factscore_lp": 0.3815674889288874,
+      "facts_per_answer": 19.7,
+      "supported_per_answer": 8.6225,
+      "unsupported_per_answer": 11.0775,
+      "prefill_per_answer": 1504.96,
+      "decode_per_answer": 231.995,
+      "retrievals_per_answer": 2.84,
+      "resamples_per_answer": 0.0,
+      "wall_s": 298.47254274599254,
+      "answers_per_s": 1.3401567739529388,
+      "bridge_acc": 0.3675,
+      "factscore_by_popularity": {
+        "rare": 0.37277493330350947,
+        "medium": 0.37338928616501466,
+        "frequent": 0.44180380955960413
+      }
+    },
+    "rag + tripwire lf-retrieve": {
+      "n": 400,
+      "responded": 0.995,
+      "factscore": 0.4022083013238384,
+      "factscore_lp": 0.3715910655830095,
+      "facts_per_answer": 21.31,
+      "supported_per_answer": 9.3625,
+      "unsupported_per_answer": 11.9475,
+      "prefill_per_answer": 1463.1525,
+      "decode_per_answer": 246.795,
+      "retrievals_per_answer": 2.945,
+      "resamples_per_answer": 0.0,
+      "wall_s": 225.04284979123622,
+      "answers_per_s": 1.7774392759915054,
+      "bridge_acc": 0.3325,
+      "factscore_by_popularity": {
+        "rare": 0.41019533029023764,
+        "medium": 0.3645185659361555,
+        "frequent": 0.4311268123929081
+      }
+    },
+    "tripwire lf-resample": {
+      "n": 400,
+      "responded": 0.955,
+      "factscore": 0.26237634865608245,
+      "factscore_lp": 0.2527056372966888,
+      "facts_per_answer": 29.345,
+      "supported_per_answer": 9.06,
+      "unsupported_per_answer": 20.285,
+      "prefill_per_answer": 2732.5175,
+      "decode_per_answer": 526.4125,
+      "retrievals_per_answer": 0.0,
+      "resamples_per_answer": 2.7975,
+      "wall_s": 31.135473800823092,
+      "answers_per_s": 12.847082480865465,
+      "bridge_acc": 0.2775,
+      "factscore_by_popularity": {
+        "rare": 0.222977905842704,
+        "medium": 0.22387276954381263,
+        "frequent": 0.33875129915485563
+      }
+    },
+    "flare-signal resample (SHARS-style)": {
+      "n": 400,
+      "responded": 0.9675,
+      "factscore": 0.27274275902716777,
+      "factscore_lp": 0.2608166417549979,
+      "facts_per_answer": 30.525,
+      "supported_per_answer": 9.6275,
+      "unsupported_per_answer": 20.8975,
+      "prefill_per_answer": 154.0425,
+      "decode_per_answer": 556.36,
+      "retrievals_per_answer": 0.0,
+      "resamples_per_answer": 2.84,
+      "wall_s": 29.768156277947128,
+      "answers_per_s": 13.437177508246567,
+      "bridge_acc": 0.2875,
+      "factscore_by_popularity": {
+        "rare": 0.22619852136796245,
+        "medium": 0.25020448576557985,
+        "frequent": 0.34056651089122847
+      }
+    },
+    "tripwire lf-route (resample, then retrieve)": {
+      "n": 400,
+      "responded": 1.0,
+      "factscore": 0.3397647454864983,
+      "factscore_lp": 0.30767820802533735,
+      "facts_per_answer": 30.0625,
+      "supported_per_answer": 10.795,
+      "unsupported_per_answer": 19.2675,
+      "prefill_per_answer": 4047.75,
+      "decode_per_answer": 601.1875,
+      "retrievals_per_answer": 2.2,
+      "resamples_per_answer": 2.93,
+      "wall_s": 83.97991727478802,
+      "answers_per_s": 4.763043510642821,
+      "bridge_acc": 0.355,
+      "factscore_by_popularity": {
+        "rare": 0.3195491227658645,
+        "medium": 0.29643347954536564,
+        "frequent": 0.4028374036358636
+      }
+    }
+  },
+  "task": "bridge",
+  "tests": [
+    {
+      "a": "tripwire lf-retrieve",
+      "b": "flare",
+      "metric": "FActScore",
+      "n": 397,
+      "diff": 0.03345004388620517,
+      "ci": [
+        0.005827134088386224,
+        0.061005433774633744
+      ],
+      "p": 0.017
+    },
+    {
+      "a": "tripwire lf-retrieve",
+      "b": "flare",
+      "metric": "right person",
+      "n": 400,
+      "diff": -0.0225,
+      "ci": [
+        -0.06,
+        0.015
+      ],
+      "p": 0.253
+    },
+    {
+      "a": "tripwire lf-retrieve",
+      "b": "rag (always, up front)",
+      "metric": "FActScore",
+      "n": 395,
+      "diff": 0.06531608138270853,
+      "ci": [
+        0.03796317787296366,
+        0.09219601298768708
+      ],
+      "p": 0.0
+    },
+    {
+      "a": "tripwire lf-retrieve",
+      "b": "rag (always, up front)",
+      "metric": "right person",
+      "n": 400,
+      "diff": 0.065,
+      "ci": [
+        0.03,
+        0.1
+      ],
+      "p": 0.0
+    },
+    {
+      "a": "rag + tripwire lf-retrieve",
+      "b": "rag (always, up front)",
+      "metric": "FActScore",
+      "n": 395,
+      "diff": 0.07008452120380641,
+      "ci": [
+        0.04796442569156212,
+        0.09202655037495741
+      ],
+      "p": 0.0
+    },
+    {
+      "a": "rag + tripwire lf-retrieve",
+      "b": "rag (always, up front)",
+      "metric": "right person",
+      "n": 400,
+      "diff": 0.03,
+      "ci": [
+        0.01,
+        0.0525
+      ],
+      "p": 0.005
+    },
+    {
+      "a": "tripwire lf-resample",
+      "b": "vanilla",
+      "metric": "FActScore",
+      "n": 372,
+      "diff": -0.0121350957582696,
+      "ci": [
+        -0.029785963300667587,
+        0.006080692932403629
+      ],
+      "p": 0.195
+    },
+    {
+      "a": "tripwire lf-resample",
+      "b": "vanilla",
+      "metric": "right person",
+      "n": 400,
+      "diff": 0.0025,
+      "ci": [
+        -0.02,
+        0.025
+      ],
+      "p": 0.936
+    },
+    {
+      "a": "tripwire lf-resample",
+      "b": "flare-signal resample (SHARS-style)",
+      "metric": "FActScore",
+      "n": 376,
+      "diff": -0.011860432058006336,
+      "ci": [
+        -0.03041507009753758,
+        0.0067713111727333575
+      ],
+      "p": 0.236
+    },
+    {
+      "a": "tripwire lf-resample",
+      "b": "flare-signal resample (SHARS-style)",
+      "metric": "right person",
+      "n": 400,
+      "diff": -0.01,
+      "ci": [
+        -0.03,
+        0.0125
+      ],
+      "p": 0.43
+    },
+    {
+      "a": "tripwire lf-route (resample, then retrieve)",
+      "b": "tripwire lf-resample",
+      "metric": "FActScore",
+      "n": 382,
+      "diff": 0.06840224716564551,
+      "ci": [
+        0.048994155293842226,
+        0.08789588365300224
+      ],
+      "p": 0.0
+    },
+    {
+      "a": "tripwire lf-route (resample, then retrieve)",
+      "b": "tripwire lf-resample",
+      "metric": "right person",
+      "n": 400,
+      "diff": 0.0775,
+      "ci": [
+        0.045,
+        0.1125
+      ],
+      "p": 0.0
+    },
+    {
+      "a": "tripwire lf-route (resample, then retrieve)",
+      "b": "tripwire lf-retrieve",
+      "metric": "FActScore",
+      "n": 398,
+      "diff": -0.055815299638775885,
+      "ci": [
+        -0.08246280244534,
+        -0.02987656252924259
+      ],
+      "p": 0.0
+    },
+    {
+      "a": "tripwire lf-route (resample, then retrieve)",
+      "b": "tripwire lf-retrieve",
+      "metric": "right person",
+      "n": 400,
+      "diff": -0.0125,
+      "ci": [
+        -0.045,
+        0.0225
+      ],
+      "p": 0.518
+    },
+    {
+      "a": "tripwire lf-route (resample, then retrieve)",
+      "b": "flare",
+      "metric": "FActScore",
+      "n": 399,
+      "diff": -0.024108344608808462,
+      "ci": [
+        -0.04803304456143647,
+        -0.0007790205927074976
+      ],
+      "p": 0.041
+    },
+    {
+      "a": "tripwire lf-route (resample, then retrieve)",
+      "b": "flare",
+      "metric": "right person",
+      "n": 400,
+      "diff": -0.035,
+      "ci": [
+        -0.0675625,
+        -0.0025
+      ],
+      "p": 0.043
+    }
+  ],
+  "judge2": {
+    "judge": "Qwen/Qwen2.5-32B-Instruct",
+    "judge2": "unsloth/Mistral-Small-24B-Instruct-2501",
+    "n_items": 100,
+    "arms": {
+      "observe": {
+        "n_facts": 3155,
+        "agreement": 0.8969889064976229,
+        "kappa": 0.770309274655562,
+        "factscore_judge1": 0.2720467792688458,
+        "factscore_judge2": 0.3217376559004654
+      },
+      "rag": {
+        "n_facts": 2438,
+        "agreement": 0.8773584905660378,
+        "kappa": 0.7293852455669211,
+        "factscore_judge1": 0.29327664075262305,
+        "factscore_judge2": 0.3789536548617472
+      },
+      "flare": {
+        "n_facts": 2842,
+        "agreement": 0.8979591836734694,
+        "kappa": 0.7892083946302848,
+        "factscore_judge1": 0.3848446114303586,
+        "factscore_judge2": 0.4456454696229067
+      },
+      "lf-retrieve": {
+        "n_facts": 1902,
+        "agreement": 0.8748685594111462,
+        "kappa": 0.7504735025962715,
+        "factscore_judge1": 0.3657672176048229,
+        "factscore_judge2": 0.4660803173739096
+      },
+      "rag-lf": {
+        "n_facts": 2171,
+        "agreement": 0.855366190695532,
+        "kappa": 0.7084699691917145,
+        "factscore_judge1": 0.35547426570236884,
+        "factscore_judge2": 0.4561624098592153
+      },
+      "lf-resample": {
+        "n_facts": 3163,
+        "agreement": 0.8981979133733797,
+        "kappa": 0.7636077687191103,
+        "factscore_judge1": 0.2443488885861051,
+        "factscore_judge2": 0.30675967634863316
+      },
+      "flare-resample": {
+        "n_facts": 3123,
+        "agreement": 0.8997758565481908,
+        "kappa": 0.7784199136210801,
+        "factscore_judge1": 0.2758510624762864,
+        "factscore_judge2": 0.31363792590803347
+      },
+      "lf-route": {
+        "n_facts": 3033,
+        "agreement": 0.8948236069897791,
+        "kappa": 0.7654157553292781,
+        "factscore_judge1": 0.31450896444875853,
+        "factscore_judge2": 0.37996912878428235
+      }
+    },
+    "overall": {
+      "n_facts": 21827,
+      "agreement": 0.8891281440417831,
+      "kappa": 0.7617934139633302
+    }
+  }
+}

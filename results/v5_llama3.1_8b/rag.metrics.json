@@ -1,0 +1,57 @@
+{
+  "mode": "rag",
+  "n": 3000,
+  "split": "test",
+  "accuracy": 0.6,
+  "accuracy_ci": [
+    0.5826666666666667,
+    0.6173416666666666
+  ],
+  "coverage": 1.0,
+  "hallucination_rate": 0.4,
+  "hallucination_rate_ci": [
+    0.3826583333333333,
+    0.41733333333333333
+  ],
+  "selective_error": 0.4,
+  "lam": 1.0,
+  "utility": 0.2,
+  "utility_ci": [
+    0.16533333333333333,
+    0.23468333333333333
+  ],
+  "evidence_hit_rate": 0.6776666666666666,
+  "acc_given_evidence_hit": 0.852926709296606,
+  "halluc_given_evidence_hit": 0.147073290703394,
+  "acc_given_evidence_miss": 0.06825232678386763,
+  "abstain_given_evidence_miss": 0.0,
+  "mean_rollbacks": 0.0,
+  "frac_rolled_back": 0.0,
+  "retrieval_rate": 1.0,
+  "retry_rate": 0.0,
+  "mean_retrievals": 1.0,
+  "retrieval_ms_p50": null,
+  "retrieval_ms_p95": null,
+  "prefill_tokens_per_q": 542.9793333333333,
+  "decode_tokens_per_q": 4.502666666666666,
+  "wall_s": 37.50277981394902,
+  "output_tok_per_s": 360.1866332846012,
+  "questions_per_s": 79.99407016981075,
+  "by_dataset": {
+    "popqa": {
+      "n": 1500,
+      "accuracy": 0.4066666666666667,
+      "hallucination_rate": 0.5933333333333334,
+      "coverage": 1.0,
+      "retrieval_rate": 1.0
+    },
+    "triviaqa": {
+      "n": 1500,
+      "accuracy": 0.7933333333333333,
+      "hallucination_rate": 0.20666666666666667,
+      "coverage": 1.0,
+      "retrieval_rate": 1.0
+    }
+  },
+  "reasons": {}
+}

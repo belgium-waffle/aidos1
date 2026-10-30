@@ -1,0 +1,353 @@
+{
+  "calibration": {
+    "n_sentences": {
+      "val": 1198,
+      "test": 2043
+    },
+    "unsupported_rate": {
+      "val": 0.7445742904841403,
+      "test": 0.7601566324033284
+    },
+    "auroc": {
+      "tripwire": {
+        "val": 0.7772080805416337,
+        "test": 0.7652121634229996
+      },
+      "flare": {
+        "val": 0.6589363697646473,
+        "test": 0.6693509599589997
+      }
+    },
+    "tau": 0.77847,
+    "flare_theta": 0.22956701672139235
+  },
+  "arms": {
+    "vanilla": {
+      "n": 277,
+      "responded": 0.855595667870036,
+      "factscore": 0.41259776840996987,
+      "factscore_lp": 0.3554919147764266,
+      "facts_per_answer": 23.91335740072202,
+      "supported_per_answer": 10.768953068592058,
+      "unsupported_per_answer": 13.144404332129964,
+      "prefill_per_answer": 39.144404332129966,
+      "decode_per_answer": 250.4404332129964,
+      "retrievals_per_answer": 0.0,
+      "resamples_per_answer": 0.0,
+      "wall_s": 20.17027347581461,
+      "answers_per_s": 13.733081027986056,
+      "factscore_by_popularity": {
+        "rare": 0.2561858114701408,
+        "medium": 0.3305645026749526,
+        "frequent": 0.6098146580423515
+      }
+    },
+    "rag (always, up front)": {
+      "n": 277,
+      "responded": 0.9638989169675091,
+      "factscore": 0.8522191139977207,
+      "factscore_lp": 0.8445349639099645,
+      "facts_per_answer": 29.490974729241877,
+      "supported_per_answer": 25.296028880866427,
+      "unsupported_per_answer": 4.194945848375451,
+      "prefill_per_answer": 483.6137184115523,
+      "decode_per_answer": 300.8050541516246,
+      "retrievals_per_answer": 1.0,
+      "resamples_per_answer": 0.0,
+      "wall_s": 39.3164648511447,
+      "answers_per_s": 7.0453943671880035,
+      "factscore_by_popularity": {
+        "rare": 0.8633437985706166,
+        "medium": 0.8876765634302817,
+        "frequent": 0.8080476972254637
+      }
+    },
+    "flare": {
+      "n": 277,
+      "responded": 0.8844765342960289,
+      "factscore": 0.587532548664768,
+      "factscore_lp": 0.5417851870121783,
+      "facts_per_answer": 26.819494584837546,
+      "supported_per_answer": 16.732851985559567,
+      "unsupported_per_answer": 10.086642599277978,
+      "prefill_per_answer": 1347.4909747292418,
+      "decode_per_answer": 346.5198555956679,
+      "retrievals_per_answer": 2.3285198555956677,
+      "resamples_per_answer": 0.0,
+      "wall_s": 139.31798029784113,
+      "answers_per_s": 1.988257362099387,
+      "factscore_by_popularity": {
+        "rare": 0.5094657377350821,
+        "medium": 0.543037605315458,
+        "frequent": 0.6941917969636549
+      }
+    },
+    "tripwire lf-retrieve": {
+      "n": 277,
+      "responded": 0.9314079422382672,
+      "factscore": 0.8367851632889259,
+      "factscore_lp": 0.8179674267943166,
+      "facts_per_answer": 28.815884476534297,
+      "supported_per_answer": 24.021660649819495,
+      "unsupported_per_answer": 4.794223826714801,
+      "prefill_per_answer": 1352.187725631769,
+      "decode_per_answer": 321.1624548736462,
+      "retrievals_per_answer": 2.407942238267148,
+      "resamples_per_answer": 0.0,
+      "wall_s": 228.62166398297995,
+      "answers_per_s": 1.2116087127273365,
+      "factscore_by_popularity": {
+        "rare": 0.8581663146815315,
+        "medium": 0.8367233197522077,
+        "frequent": 0.8175763972057104
+      }
+    },
+    "rag + tripwire lf-retrieve": {
+      "n": 277,
+      "responded": 0.9675090252707581,
+      "factscore": 0.8657277677777627,
+      "factscore_lp": 0.8651609813426826,
+      "facts_per_answer": 29.018050541516246,
+      "supported_per_answer": 25.144404332129962,
+      "unsupported_per_answer": 3.8736462093862816,
+      "prefill_per_answer": 1471.8339350180506,
+      "decode_per_answer": 314.74007220216606,
+      "retrievals_per_answer": 2.675090252707581,
+      "resamples_per_answer": 0.0,
+      "wall_s": 195.70817404147238,
+      "answers_per_s": 1.4153726657390464,
+      "factscore_by_popularity": {
+        "rare": 0.8768600003221644,
+        "medium": 0.8945350437055758,
+        "frequent": 0.8282453003624177
+      }
+    },
+    "tripwire lf-resample": {
+      "n": 277,
+      "responded": 0.8086642599277978,
+      "factscore": 0.4212928830874376,
+      "factscore_lp": 0.3735021644111115,
+      "facts_per_answer": 23.96389891696751,
+      "supported_per_answer": 10.927797833935019,
+      "unsupported_per_answer": 13.036101083032491,
+      "prefill_per_answer": 2010.4440433212997,
+      "decode_per_answer": 504.4332129963899,
+      "retrievals_per_answer": 0.0,
+      "resamples_per_answer": 2.2129963898916967,
+      "wall_s": 58.57337980531156,
+      "answers_per_s": 4.729110748273417,
+      "factscore_by_popularity": {
+        "rare": 0.22269840893668516,
+        "medium": 0.3583580802727802,
+        "frequent": 0.6127845423475806
+      }
+    },
+    "flare-signal resample (SHARS-style)": {
+      "n": 277,
+      "responded": 0.8628158844765343,
+      "factscore": 0.42413862682129,
+      "factscore_lp": 0.36551596324341573,
+      "facts_per_answer": 23.819494584837546,
+      "supported_per_answer": 11.144404332129964,
+      "unsupported_per_answer": 12.675090252707582,
+      "prefill_per_answer": 123.63537906137184,
+      "decode_per_answer": 495.3321299638989,
+      "retrievals_per_answer": 0.0,
+      "resamples_per_answer": 2.1588447653429603,
+      "wall_s": 63.21618248289451,
+      "answers_per_s": 4.38178942670182,
+      "factscore_by_popularity": {
+        "rare": 0.2756398489431133,
+        "medium": 0.3616939803369277,
+        "frequent": 0.5999661387808719
+      }
+    },
+    "tripwire lf-route (resample, then retrieve)": {
+      "n": 277,
+      "responded": 0.9494584837545126,
+      "factscore": 0.5825680148629614,
+      "factscore_lp": 0.5585991255788741,
+      "facts_per_answer": 29.444043321299638,
+      "supported_per_answer": 17.60649819494585,
+      "unsupported_per_answer": 11.83754512635379,
+      "prefill_per_answer": 3128.642599277978,
+      "decode_per_answer": 599.6498194945848,
+      "retrievals_per_answer": 1.4693140794223827,
+      "resamples_per_answer": 2.3935018050541514,
+      "wall_s": 114.4776701759547,
+      "answers_per_s": 2.419685861655333,
+      "factscore_by_popularity": {
+        "rare": 0.5013018152130979,
+        "medium": 0.5658518442575613,
+        "frequent": 0.6763813483358286
+      }
+    }
+  },
+  "task": "bio",
+  "tests": [
+    {
+      "a": "tripwire lf-retrieve",
+      "b": "flare",
+      "metric": "FActScore",
+      "n": 241,
+      "diff": 0.2476051879904253,
+      "ci": [
+        0.21568640464034533,
+        0.28047989574484344
+      ],
+      "p": 0.0
+    },
+    {
+      "a": "tripwire lf-retrieve",
+      "b": "rag (always, up front)",
+      "metric": "FActScore",
+      "n": 251,
+      "diff": -0.018831639347837582,
+      "ci": [
+        -0.04203517717934491,
+        0.004472195938835705
+      ],
+      "p": 0.109
+    },
+    {
+      "a": "rag + tripwire lf-retrieve",
+      "b": "rag (always, up front)",
+      "metric": "FActScore",
+      "n": 266,
+      "diff": 0.01555306439683018,
+      "ci": [
+        0.0022296513600186707,
+        0.029464718850887684
+      ],
+      "p": 0.024
+    },
+    {
+      "a": "tripwire lf-resample",
+      "b": "vanilla",
+      "metric": "FActScore",
+      "n": 217,
+      "diff": -0.0045094753182842815,
+      "ci": [
+        -0.029539761504086885,
+        0.021318339508354916
+      ],
+      "p": 0.746
+    },
+    {
+      "a": "tripwire lf-resample",
+      "b": "flare-signal resample (SHARS-style)",
+      "metric": "FActScore",
+      "n": 219,
+      "diff": -0.013745246754313961,
+      "ci": [
+        -0.04059644250496438,
+        0.010768988569351245
+      ],
+      "p": 0.313
+    },
+    {
+      "a": "tripwire lf-route (resample, then retrieve)",
+      "b": "tripwire lf-resample",
+      "metric": "FActScore",
+      "n": 223,
+      "diff": 0.15587340851227796,
+      "ci": [
+        0.12463274574320864,
+        0.18889217835633978
+      ],
+      "p": 0.0
+    },
+    {
+      "a": "tripwire lf-route (resample, then retrieve)",
+      "b": "tripwire lf-retrieve",
+      "metric": "FActScore",
+      "n": 254,
+      "diff": -0.25591552563442793,
+      "ci": [
+        -0.283929875988718,
+        -0.22847510793542167
+      ],
+      "p": 0.0
+    },
+    {
+      "a": "tripwire lf-route (resample, then retrieve)",
+      "b": "flare",
+      "metric": "FActScore",
+      "n": 243,
+      "diff": -0.006042561892187856,
+      "ci": [
+        -0.03446758145448501,
+        0.02325822483640745
+      ],
+      "p": 0.689
+    }
+  ],
+  "judge2": {
+    "judge": "Qwen/Qwen2.5-32B-Instruct",
+    "judge2": "unsloth/Mistral-Small-24B-Instruct-2501",
+    "n_items": 100,
+    "arms": {
+      "observe": {
+        "n_facts": 2262,
+        "agreement": 0.9230769230769231,
+        "kappa": 0.8406651461383196,
+        "factscore_judge1": 0.40405481187720044,
+        "factscore_judge2": 0.3693155283052464
+      },
+      "rag": {
+        "n_facts": 2897,
+        "agreement": 0.9137038315498792,
+        "kappa": 0.7135202614451474,
+        "factscore_judge1": 0.8165984189793194,
+        "factscore_judge2": 0.7764422460522475
+      },
+      "flare": {
+        "n_facts": 2553,
+        "agreement": 0.9138268703486094,
+        "kappa": 0.8247436963147685,
+        "factscore_judge1": 0.5474669799019743,
+        "factscore_judge2": 0.5081198498201989
+      },
+      "lf-retrieve": {
+        "n_facts": 2679,
+        "agreement": 0.9197461739455021,
+        "kappa": 0.7450966334619832,
+        "factscore_judge1": 0.8278285025156464,
+        "factscore_judge2": 0.8005838877143993
+      },
+      "rag-lf": {
+        "n_facts": 2819,
+        "agreement": 0.9226676126285916,
+        "kappa": 0.717668473097413,
+        "factscore_judge1": 0.8466904183373894,
+        "factscore_judge2": 0.8252512929361486
+      },
+      "lf-resample": {
+        "n_facts": 2298,
+        "agreement": 0.9086161879895561,
+        "kappa": 0.812753177818131,
+        "factscore_judge1": 0.41367608455581556,
+        "factscore_judge2": 0.36102239243923534
+      },
+      "flare-resample": {
+        "n_facts": 2284,
+        "agreement": 0.9163747810858144,
+        "kappa": 0.8286034436153561,
+        "factscore_judge1": 0.40478144519530884,
+        "factscore_judge2": 0.3645356377691631
+      },
+      "lf-route": {
+        "n_facts": 2663,
+        "agreement": 0.8944799098760796,
+        "kappa": 0.7873264947266675,
+        "factscore_judge1": 0.5717954376495576,
+        "factscore_judge2": 0.4972020589039705
+      }
+    },
+    "overall": {
+      "n_facts": 20455,
+      "agreement": 0.9140063554143242,
+      "kappa": 0.8182435090810316
+    }
+  }
+}

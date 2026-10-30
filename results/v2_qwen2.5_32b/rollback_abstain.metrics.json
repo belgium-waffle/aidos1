@@ -1,0 +1,46 @@
+{
+  "mode": "rollback+abstain",
+  "n": 3000,
+  "split": "test",
+  "accuracy": 0.4103333333333333,
+  "accuracy_ci": [
+    0.39366666666666666,
+    0.42767499999999997
+  ],
+  "coverage": 0.5016666666666667,
+  "hallucination_rate": 0.09133333333333334,
+  "hallucination_rate_ci": [
+    0.08066666666666666,
+    0.10133333333333333
+  ],
+  "selective_error": 0.18205980066445182,
+  "mean_rollbacks": 0.216,
+  "frac_rolled_back": 0.08866666666666667,
+  "retrieval_rate": 0.0,
+  "retrieval_ms_p50": null,
+  "retrieval_ms_p95": null,
+  "wall_s": 9.900374558288604,
+  "output_tok_per_s": 739.264959816346,
+  "questions_per_s": 303.0188385638801,
+  "by_dataset": {
+    "popqa": {
+      "n": 1500,
+      "accuracy": 0.16,
+      "hallucination_rate": 0.050666666666666665,
+      "coverage": 0.21066666666666667,
+      "retrieval_rate": 0.0
+    },
+    "triviaqa": {
+      "n": 1500,
+      "accuracy": 0.6606666666666666,
+      "hallucination_rate": 0.132,
+      "coverage": 0.7926666666666666,
+      "retrieval_rate": 0.0
+    }
+  },
+  "reasons": {
+    "budget": 159,
+    "post": 648,
+    "pre": 1336
+  }
+}

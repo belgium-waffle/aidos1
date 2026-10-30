@@ -1,0 +1,112 @@
+{
+  "pass": true,
+  "checks": {
+    "observe==vanilla": {
+      "exact": 24,
+      "n": 24,
+      "rate": 1.0,
+      "first_divergence": [],
+      "ref_margin_at_divergence": [],
+      "unexplained": [],
+      "pass": true
+    },
+    "prefill-insert==ref": {
+      "exact": 23,
+      "n": 24,
+      "rate": 0.9583333333333334,
+      "first_divergence": [
+        10
+      ],
+      "ref_margin_at_divergence": [
+        0.0625
+      ],
+      "unexplained": [],
+      "pass": true
+    },
+    "mid-insert==ref": {
+      "exact": 22,
+      "n": 24,
+      "rate": 0.9166666666666666,
+      "first_divergence": [
+        4,
+        2
+      ],
+      "ref_margin_at_divergence": [
+        0.0,
+        0.0
+      ],
+      "unexplained": [],
+      "pass": true,
+      "n_finished_before_insert": 1
+    },
+    "mid-insert-delayed==ref": {
+      "exact": 22,
+      "n": 24,
+      "rate": 0.9166666666666666,
+      "first_divergence": [
+        4,
+        2
+      ],
+      "ref_margin_at_divergence": [
+        0.0,
+        0.0
+      ],
+      "unexplained": [],
+      "pass": true,
+      "n_finished_before_insert": 1
+    },
+    "mid-insert-recompute==ref": {
+      "exact": 22,
+      "n": 24,
+      "rate": 0.9166666666666666,
+      "first_divergence": [
+        4,
+        2
+      ],
+      "ref_margin_at_divergence": [
+        0.0,
+        0.0
+      ],
+      "unexplained": [],
+      "pass": true,
+      "n_finished_before_insert": 1
+    },
+    "rewind-insert==prefill-ref": {
+      "exact": 23,
+      "n": 24,
+      "rate": 0.9583333333333334,
+      "first_divergence": [
+        10
+      ],
+      "ref_margin_at_divergence": [
+        0.0625
+      ],
+      "unexplained": [],
+      "pass": true,
+      "n_finished_before_insert": 1
+    },
+    "retry-insert==ref": {
+      "exact": 23,
+      "n": 24,
+      "rate": 0.9583333333333334,
+      "first_divergence": [
+        1
+      ],
+      "ref_margin_at_divergence": [
+        0.0625
+      ],
+      "unexplained": [],
+      "pass": true
+    },
+    "forced-rollback-completes": {
+      "pass": true,
+      "n": 24
+    },
+    "delayed_wall_s": {
+      "pass": true,
+      "wall_s": 8.617610420100391,
+      "undelayed_wall_s": 1.6689471839927137,
+      "serial_delay_lower_bound_s": 7.199999999999999
+    }
+  }
+}
