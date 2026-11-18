@@ -16,6 +16,9 @@ It is a plugin, not a fork: it does nothing unless `AIDOS_CONFIG` is set. Calibr
 
 This repository accompanies the system demonstration paper (under review).
 
+**Try it in your browser, no GPU needed: https://belgium-waffle.github.io/aidos1/** (live-view replay, cost explorer,
+exactness checks).
+
 | | |
 |---|---|
 | ![Live view](paper/figures/fig2_live_view.png) | ![Cost explorer](paper/figures/fig3_cost_explorer.png) |
@@ -110,7 +113,8 @@ from 7B to 70B. Source tables are in [paper/results](paper/results); see [paper/
 aidos-vllm/        the pip package: plugin, scheduler, kernel, CLI, demo tools, head bundles, tests, examples
 paper/figures/     figures in the paper
 paper/results/     the measurements behind them (verify, serve check, live-view recording, throughput, answer quality)
-paper/scripts/     scripts that turn the results into the figures and replay the live view
+paper/scripts/     scripts that turn the results into the figures, replay the live view and build the site
+docs/              the browser demo site (GitHub Pages), built by paper/scripts/build_site.py
 ```
 
 ## License

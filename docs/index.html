@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aidos</title><meta name="description" content="Aidos: answer, retrieve or abstain from inside the vLLM decode loop. Live demos and code.">
+<style>
+:root{--bg:#fbfaf7;--panel:#fff;--ink:#1d1d1b;--muted:#6b6a65;--line:#e4e1d8;--accent:#2f6f5e;--chip:#f1efe8;--code:#f4f2ec}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151514;--panel:#1d1d1b;--ink:#ecebe6;--muted:#a3a19a;
+--line:#33322e;--accent:#6fc2a8;--chip:#262522;--code:#232220}}
+:root[data-theme="dark"]{--bg:#151514;--panel:#1d1d1b;--ink:#ecebe6;--muted:#a3a19a;--line:#33322e;--accent:#6fc2a8;--chip:#262522;--code:#232220}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:980px;margin:0 auto;padding:32px 16px 56px}
+a{color:var(--accent)}h1{font-size:28px;line-height:1.2;margin:0 0 8px}h2{font-size:18px;margin:32px 0 10px}
+.lead{color:var(--muted);font-size:16px;margin:0 0 20px;max-width:760px}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:760px){.cards{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-decoration:none;color:inherit;display:block}
+.card:hover{border-color:var(--accent)}.card b{display:block;font-size:15px;margin-bottom:4px;color:var(--accent)}
+.card span{color:var(--muted);font-size:13.5px}
+pre{background:var(--code);border:1px solid var(--line);border-radius:10px;padding:12px 14px;overflow-x:auto;font-size:13px;line-height:1.5}
+code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+ul{padding-left:20px}li{margin:4px 0}
+img.fig{width:100%;height:auto;background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:13px;color:var(--muted);font-weight:500}
+.ok{display:inline-block;font-size:12px;padding:1px 9px;border-radius:999px;background:var(--accent);color:var(--bg)}
+.note{color:var(--muted);font-size:13.5px}
+.top{display:flex;gap:16px;font-size:13.5px;margin-bottom:24px}.top a{text-decoration:none}
+</style></head><body><main>
+<nav class="top"><a href="./">Aidos</a><a href="live-view/">Live view</a>
+<a href="cost-explorer/">Cost explorer</a><a href="verify/">Exactness checks</a>
+<a href="https://github.com/belgium-waffle/aidos1">Code</a></nav>
+
+<h1>Aidos: answer, retrieve or abstain from inside the vLLM decode loop</h1>
+<p class="lead">A plugin for vLLM V1 that reads small linear probes from the model's hidden states at every step and acts
+on them in the scheduler: it decides whether to answer, fetch evidence or decline to answer, pauses a request with its
+KV cache intact while retrieval runs, and can roll back mid-answer, all token-exact with recomputation.</p>
+
+<h2>Try it in your browser (no GPU needed)</h2>
+<div class="cards">
+<a class="card" href="live-view/"><b>Live view</b><span>Replay a recorded batch on Qwen2.5-7B: requests decoding, paused for
+retrieval with their KV cache kept, and abstaining, with the probe's risk at every token. Scrub the timeline.</span></a>
+<a class="card" href="cost-explorer/"><b>Cost explorer</b><span>Move λ, the cost of a wrong answer, and watch Aidos re-plan how much
+it answers. A reasoning model told the same λ stays put. Every point is a measured result.</span></a>
+<a class="card" href="verify/"><b>Exactness checks</b><span>The eight engine checks run by <code>aidos verify</code>: insertion,
+rollback and retries reproduce recomputation token for token (24 of 24 prompts each).</span></a>
+</div>
+
+<h2>Run it on your GPU</h2>
+<pre><code>git clone https://github.com/belgium-waffle/aidos1
+cd aidos1/aidos-vllm
+pip install -e ".[bm25]"          # pins vllm 0.21.*
+aidos info
+python examples/quickstart.py     # three questions on a two-document corpus
+
+# OpenAI-compatible server
+aidos config bundles/qwen2.5-7b-instruct --lam 1 --retriever my_corpus.jsonl --status aidos_status.json -o aidos.json
+AIDOS_CONFIG=$PWD/aidos.json vllm serve Qwen/Qwen2.5-7B-Instruct \
+    --scheduler-cls aidos.engine.scheduler.AidosScheduler --no-async-scheduling
+aidos live --status aidos_status.json     # the live view, on your own traffic
+aidos verify --model Qwen/Qwen2.5-7B-Instruct --bundle bundles/qwen2.5-7b-instruct</code></pre>
+<p class="note">Heads ship for Qwen2.5-7B / 32B, Llama-3.1-8B, Llama-3.3-70B, Mistral-7B and Qwen3-8B, each calibrated for
+λ ∈ {0.1, 0.25, 0.5, 1, 2, 4}. Retrievers: your own documents (BM25 in memory), a precomputed cache, a BM25 index, or any
+Python search function. MIT licence.</p>
+
+<h2>How it works</h2>
+<img class="fig" src="figures/fig1_architecture.svg" alt="Architecture: the worker computes hidden states, a fused kernel scores the probes, scores ride back on the runner output, and the scheduler pauses, inserts evidence or rolls back.">
+
+<h2>Results</h2>
+<ul>
+<li><b>Exact:</b> all eight engine checks match recomputation on every model, including tensor-parallel 70B.</li>
+<li><b>Better answers:</b> higher utility than five adaptive-retrieval pipelines run in the same engine in 75 of 75 paired
+comparisons (48 of 48 on a sealed held-out set), with 0.40–0.57 times the hallucination of the strongest.</li>
+<li><b>Cost-aware:</b> wrong on 6.9% / 3.8% / 1.7% of questions at λ = 1 / 2 / 4, where a reasoning model with search stays at
+about 25%, and 6–21 times faster.</li>
+<li><b>Cheap to run:</b> 2–3% fewer requests per second than vLLM with the same scheduling (7B, 256 concurrent requests).</li>
+</ul>
+<img class="fig" src="figures/fig_lamsweep.png" alt="Accuracy and correct answers per second against hallucination rate for Aidos at several λ and for always-retrieve.">
+<p class="note">Throughput figure: Qwen2.5-7B, one H100, 256 concurrent requests, cached retrieval; measured on a 2,000-question test
+subset that over-represents TriviaQA (full-split numbers will replace it). Paper under review; source data in
+<a href="https://github.com/belgium-waffle/aidos1/tree/main/paper">paper/</a>.</p>
+
+</main></body></html>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aidos Live View (replay)</title>
+<style>
+:root{--bg:#fbfaf7;--panel:#fff;--ink:#1d1d1b;--muted:#6b6a65;--line:#e4e1d8;--grid:#efece4;
+--run:#2f6f5e;--pause:#c08a1e;--abst:#b4543a;--done:#6b6a65;--chip:#f1efe8}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151514;--panel:#1d1d1b;--ink:#ecebe6;--muted:#a3a19a;
+--line:#33322e;--grid:#262522;--run:#6fc2a8;--pause:#e3b24f;--abst:#e2876d;--done:#a3a19a;--chip:#262522}}
+:root[data-theme="dark"]{--bg:#151514;--panel:#1d1d1b;--ink:#ecebe6;--muted:#a3a19a;--line:#33322e;--grid:#262522;
+--run:#6fc2a8;--pause:#e3b24f;--abst:#e2876d;--done:#a3a19a;--chip:#262522}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:1120px;margin:0 auto;padding:24px 16px 40px}
+h1{font-size:21px;margin:0}.sub{color:var(--muted);margin:2px 0 16px}
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.live{font-size:12px;color:var(--muted)}.live i{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--muted);margin-right:6px}
+.live.on i{background:var(--run);box-shadow:0 0 0 3px color-mix(in srgb,var(--run) 25%,transparent)}
+.counts{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:10px;margin:8px 0 16px}
+@media (max-width:760px){.counts{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.c{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.c b{display:block;font-size:22px;font-variant-numeric:tabular-nums}.c span{font-size:12px;color:var(--muted)}
+.cols{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:16px}
+@media (max-width:860px){.cols{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px 14px;overflow:hidden}
+.card h2{font-size:14px;margin:0 0 8px}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums}
+th{font-size:11.5px;font-weight:500;color:var(--muted);text-align:left;padding:4px 6px;border-bottom:1px solid var(--line)}
+td{padding:5px 6px;border-bottom:1px solid var(--grid);white-space:nowrap}
+td.id{max-width:110px;overflow:hidden;text-overflow:ellipsis;color:var(--muted);font-size:12px}
+.pill{display:inline-block;font-size:11.5px;padding:1px 8px;border-radius:999px;color:var(--bg)}
+.running{background:var(--run)}.paused{background:var(--pause)}.abstained{background:var(--abst)}.finished{background:var(--done)}
+.empty{color:var(--muted);padding:18px 4px}
+svg.spark{display:block}
+.legend{font-size:12px;color:var(--muted);margin-top:8px}
+</style>
+</head>
+<body>
+
+<div id="replay" style="position:sticky;top:0;z-index:5;background:var(--panel);border-bottom:1px solid var(--line);padding:10px 16px;font:13px system-ui,sans-serif;color:var(--ink)">
+<div style="max-width:1120px;margin:0 auto;display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+<b>Replay</b><span style="color:var(--muted)">a recorded batch: 64 questions on Qwen2.5-7B, 16 slots, live BM25 over 21M passages, 300 ms added retrieval latency</span>
+<button id="rp-play" style="font:inherit;padding:3px 12px;border:1px solid var(--line);border-radius:8px;background:var(--chip);color:var(--ink);cursor:pointer">Pause</button>
+<input id="rp-pos" type="range" min="0" max="0" value="0" style="flex:1;min-width:160px" aria-label="Snapshot">
+<span id="rp-t" style="font-variant-numeric:tabular-nums;min-width:110px">0.0 s</span>
+<a href="../" style="color:var(--run)">Aidos</a></div></div>
+<script>
+// Serves the page's status.json requests from the recorded trace, in the browser (no server).
+(function(){
+  let L=[],T=[],i=0,playing=true,t0=performance.now(),base=0;
+  const pos=()=>document.getElementById("rp-pos"),lab=()=>document.getElementById("rp-t"),btn=()=>document.getElementById("rp-play");
+  const ready=fetch("trace.jsonl").then(r=>r.text()).then(x=>{L=x.split("\n").filter(Boolean).map(l=>JSON.parse(l));
+    T=L.map(s=>s.t-L[0].t);pos().max=L.length-1;});
+  function at(e){let k=0;for(let j=0;j<T.length;j++){if(T[j]<=e)k=j;}return k}
+  function show(){pos().value=i;lab().textContent=T[i].toFixed(1)+" s of "+T[T.length-1].toFixed(1)+" s"}
+  const real=window.fetch.bind(window);
+  window.fetch=async function(u,o){
+    if(String(u).startsWith("status.json")){await ready;
+      if(playing){const span=T[T.length-1]+2,e=(base+(performance.now()-t0)/1000)%span;i=at(e);}
+      show();const s=Object.assign({},L[i],{t:Date.now()/1000});
+      return new Response(JSON.stringify(s),{headers:{"Content-Type":"application/json"}});}
+    return real(u,o)};
+  document.addEventListener("DOMContentLoaded",()=>{
+    pos().addEventListener("input",()=>{playing=false;i=+pos().value;base=T[i];btn().textContent="Play"});
+    btn().addEventListener("click",()=>{playing=!playing;if(playing){base=T[i];t0=performance.now()}btn().textContent=playing?"Pause":"Play"});
+  });
+})();
+</script>
+<main>
+<div class="top"><div><h1>Live view</h1><p class="sub" id="sub">Requests inside the vLLM decode loop: state and the probe's risk score at every generated token.</p></div>
+<div class="live" id="live"><i></i>waiting for the engine</div></div>
+<div class="counts" id="counts"></div>
+<div class="cols">
+  <section class="card"><h2>In flight</h2><div id="active"></div>
+  <p class="legend"><span class="pill running">running</span> decoding · <span class="pill paused">paused</span> waiting for retrieval, KV cache kept, the rest of the batch keeps decoding · the line is the risk score per token (dashed: the policy's threshold region)</p></section>
+  <section class="card"><h2>Just finished</h2><div id="done"></div></section>
+</div>
+</main>
+<script>
+const $=s=>document.querySelector(s);let last=0;
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+function spark(tr,state){const w=150,h=28;const v=tr.filter(x=>x!=null);if(!v.length)return `<svg class="spark" width="${w}" height="${h}"></svg>`;
+  const n=tr.length,xs=i=>n<2?w/2:i*(w-4)/(n-1)+2,ys=x=>h-3-x*(h-6);let p="";tr.forEach((x,i)=>{if(x!=null)p+=(p?" L":"M")+xs(i).toFixed(1)+" "+ys(x).toFixed(1)});
+  const col=css(state==="paused"?"--pause":state==="abstained"?"--abst":state==="running"?"--run":"--done");
+  return `<svg class="spark" width="${w}" height="${h}" viewBox="0 0 ${w} ${h}"><line x1="0" x2="${w}" y1="${ys(.5)}" y2="${ys(.5)}" stroke="${css("--line")}" stroke-dasharray="3 3"/><path d="${p}" fill="none" stroke="${col}" stroke-width="1.6"/></svg>`}
+const f=x=>x==null?"–":(+x).toFixed(2);
+function rows(list,showFinish){if(!list.length)return `<div class="empty">${showFinish?"Nothing finished yet.":"No request in flight."}</div>`;
+  return `<table><tr><th>request</th><th>state</th><th>tokens</th><th>pre-risk</th><th>retr.</th><th>roll.</th><th>risk per token</th></tr>`+
+  list.map(r=>`<tr><td class="id" title="${r.id}">${r.id}</td><td><span class="pill ${r.state}">${r.state}</span></td><td>${r.released??"–"}/${r.decoded??"–"}</td><td>${f(r.pre_risk)}</td><td>${r.retrievals??0}</td><td>${r.rollbacks??0}</td><td>${spark(r.trace||[],r.state)}</td></tr>`).join("")+`</table>`}
+async function tick(){
+  try{const s=await (await fetch("status.json",{cache:"no-store"})).json();
+    if(s&&s.t){const age=Date.now()/1000-s.t,on=age<5;$("#live").className="live"+(on?" on":"");
+      $("#live").lastChild.textContent=on?`live · policy ${s.policy} · λ ${s.lam}`:`last update ${Math.round(age)} s ago`;
+      const act=s.active||[],fin=(s.finished||[]).slice().reverse(),st=s.stats||{};
+      const k=[["running",act.filter(r=>r.state==="running").length],["paused for retrieval",act.filter(r=>r.state==="paused").length],["waiting",s.waiting??0],
+        ["retrievals",st.retrieve??0],["rollbacks",st.rollback??0],["abstentions",st.abstain??0]];
+      $("#counts").innerHTML=k.map(([n,v])=>`<div class="c"><b>${v}</b><span>${n}</span></div>`).join("");
+      $("#active").innerHTML=rows(act.sort((a,b)=>(a.state>b.state)-(a.state<b.state)),false);$("#done").innerHTML=rows(fin.slice(0,24),true);}
+  }catch(e){}
+  setTimeout(tick,400)}
+tick();
+</script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aidos exactness checks</title><meta name="description" content="The eight exactness checks of aidos verify.">
+<style>
+:root{--bg:#fbfaf7;--panel:#fff;--ink:#1d1d1b;--muted:#6b6a65;--line:#e4e1d8;--accent:#2f6f5e;--chip:#f1efe8;--code:#f4f2ec}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#151514;--panel:#1d1d1b;--ink:#ecebe6;--muted:#a3a19a;
+--line:#33322e;--accent:#6fc2a8;--chip:#262522;--code:#232220}}
+:root[data-theme="dark"]{--bg:#151514;--panel:#1d1d1b;--ink:#ecebe6;--muted:#a3a19a;--line:#33322e;--accent:#6fc2a8;--chip:#262522;--code:#232220}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+main{max-width:980px;margin:0 auto;padding:32px 16px 56px}
+a{color:var(--accent)}h1{font-size:28px;line-height:1.2;margin:0 0 8px}h2{font-size:18px;margin:32px 0 10px}
+.lead{color:var(--muted);font-size:16px;margin:0 0 20px;max-width:760px}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:760px){.cards{grid-template-columns:1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-decoration:none;color:inherit;display:block}
+.card:hover{border-color:var(--accent)}.card b{display:block;font-size:15px;margin-bottom:4px;color:var(--accent)}
+.card span{color:var(--muted);font-size:13.5px}
+pre{background:var(--code);border:1px solid var(--line);border-radius:10px;padding:12px 14px;overflow-x:auto;font-size:13px;line-height:1.5}
+code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+ul{padding-left:20px}li{margin:4px 0}
+img.fig{width:100%;height:auto;background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px}
+table{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{font-size:13px;color:var(--muted);font-weight:500}
+.ok{display:inline-block;font-size:12px;padding:1px 9px;border-radius:999px;background:var(--accent);color:var(--bg)}
+.note{color:var(--muted);font-size:13.5px}
+.top{display:flex;gap:16px;font-size:13.5px;margin-bottom:24px}.top a{text-decoration:none}
+</style></head><body><main>
+<nav class="top"><a href="../">Aidos</a><a href="../live-view/">Live view</a>
+<a href="../cost-explorer/">Cost explorer</a><a href="../verify/">Exactness checks</a>
+<a href="https://github.com/belgium-waffle/aidos1">Code</a></nav>
+
+<h1>Exactness checks</h1>
+<p class="lead">Aidos edits requests mid-generation: it inserts evidence into a paused request's KV cache and can roll the cache
+back. <code>aidos verify</code> checks that every such edit produces exactly the tokens a recomputation from scratch would.
+Greedy decoding makes the expected output exact; a mismatch is accepted only at a bf16 near-tie (the reference's runner-up token,
+margin below 1 nat).</p>
+<table><tr><th>check</th><th>what it tests</th><th>exact</th><th></th></tr><tr><td><code>observe == vanilla</code></td><td>Observe-only mode (probes scored, never acted on) produces exactly the tokens of unmodified vLLM.</td><td>24/24</td><td><span class='ok'>pass</span></td></tr><tr><td><code>prefill-insert == reference</code></td><td>Retrieval decided at prefill equals a fresh request with the evidence in its prompt.</td><td>24/24</td><td><span class='ok'>pass</span></td></tr><tr><td><code>mid-insert == reference</code></td><td>Evidence inserted after k generated tokens equals a fresh request with the prompt, those tokens and the evidence.</td><td>24/24</td><td><span class='ok'>pass</span></td></tr><tr><td><code>mid-insert-delayed == reference</code></td><td>The same with 300 ms of retrieval latency while the rest of the batch keeps decoding.</td><td>24/24</td><td><span class='ok'>pass</span></td></tr><tr><td><code>mid-insert-recompute == reference</code></td><td>The same on the recomputation path instead of the KV-insertion path.</td><td>24/24</td><td><span class='ok'>pass</span></td></tr><tr><td><code>rewind-insert == prefill reference</code></td><td>The deployed rewind (roll back, then insert) equals evidence at prefill.</td><td>24/24</td><td><span class='ok'>pass</span></td></tr><tr><td><code>retry-insert == reference</code></td><td>A second retrieval attempt equals a request with both evidence turns in its prompt.</td><td>24/24</td><td><span class='ok'>pass</span></td></tr><tr><td><code>forced-rollback completes</code></td><td>Forced rollbacks every three steps run to completion without corrupting other requests.</td><td>24/24</td><td><span class='ok'>pass</span></td></tr></table>
+<p class="note">This run: Qwen2.5-7B-Instruct, vLLM 0.21.0, one GPU, 24 prompts per check, installed from the release package with
+plain pip on a fresh node; overall result: all pass. Raw outputs:
+<a href="https://github.com/belgium-waffle/aidos1/tree/main/paper/results/verify_qwen2.5-7b">paper/results/verify_qwen2.5-7b</a>. In the paper the same checks pass on
+five models from 7B to 70B, including tensor parallelism. Run it yourself:</p>
+<pre><code>aidos verify --model Qwen/Qwen2.5-7B-Instruct --bundle bundles/qwen2.5-7b-instruct</code></pre>
+
+</main></body></html>
