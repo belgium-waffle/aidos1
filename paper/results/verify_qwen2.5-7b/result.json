@@ -1,0 +1,59 @@
+{
+ "pass": true,
+ "checks": {
+  "observe == vanilla": {
+   "exact": 24,
+   "n": 24,
+   "near_tie_margins": [],
+   "unexplained": [],
+   "pass": true
+  },
+  "prefill-insert == reference": {
+   "exact": 24,
+   "n": 24,
+   "near_tie_margins": [],
+   "unexplained": [],
+   "pass": true
+  },
+  "mid-insert == reference": {
+   "exact": 24,
+   "n": 24,
+   "near_tie_margins": [],
+   "unexplained": [],
+   "pass": true
+  },
+  "mid-insert-delayed == reference": {
+   "exact": 24,
+   "n": 24,
+   "near_tie_margins": [],
+   "unexplained": [],
+   "pass": true
+  },
+  "mid-insert-recompute == reference": {
+   "exact": 24,
+   "n": 24,
+   "near_tie_margins": [],
+   "unexplained": [],
+   "pass": true
+  },
+  "rewind-insert == prefill reference": {
+   "exact": 24,
+   "n": 24,
+   "near_tie_margins": [],
+   "unexplained": [],
+   "pass": true
+  },
+  "retry-insert == reference": {
+   "exact": 24,
+   "n": 24,
+   "near_tie_margins": [],
+   "unexplained": [],
+   "pass": true
+  },
+  "forced-rollback completes": {
+   "pass": true,
+   "n": 24,
+   "exact": 24
+  }
+ }
+}

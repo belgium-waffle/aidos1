@@ -1,0 +1,40 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aidos-vllm"
+version = "0.1.0"
+description = "Aidos: answer, retrieve or abstain from inside the vLLM decode loop (vLLM V1 plugin)"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.10"
+dependencies = [
+    "vllm==0.21.*",
+    "torch",
+    "transformers>=4.45",
+    "numpy",
+]
+
+[project.optional-dependencies]
+bm25 = ["bm25s", "PyStemmer"]   # live BM25 over your own corpus or the DPR Wikipedia split
+rerank = []                       # cross-encoder reranking uses transformers (already required)
+dev = ["pytest"]
+
+# vLLM discovers this in every process it spawns (engine core + workers).
+# The plugin does nothing unless AIDOS_CONFIG is set.
+[project.entry-points."vllm.general_plugins"]
+aidos = "aidos.engine.plugin:register"
+
+[project.scripts]
+aidos = "aidos.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"aidos.demo" = ["*.html", "*.json"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

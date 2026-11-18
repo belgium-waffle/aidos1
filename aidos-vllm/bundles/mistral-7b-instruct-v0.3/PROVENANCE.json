@@ -1,0 +1,26 @@
+{
+ "model": "unsloth/mistral-7b-instruct-v0.3",
+ "source_run": "v5_mistral_7b",
+ "exported": "2026-11-14 03:36:19",
+ "heads": {
+  "head_post.pt": "cd4a58777a457ad3",
+  "head_pre.pt": "48b2e3feb7ce2f59",
+  "head_know.pt": "fc4ca4e317930173",
+  "head_help.pt": "9fefd026ed4bd4f3",
+  "head_pre_rag.pt": "ef376b10543a0954",
+  "head_post_rag.pt": "419a43c26479b3f3",
+  "head_gain.pt": "0e905cc962366740",
+  "head_harm.pt": "896752eaef6c9d04"
+ },
+ "lams": [
+  0.1,
+  0.25,
+  0.5,
+  1.0,
+  2.0,
+  4.0
+ ],
+ "policy": "route-eu",
+ "max_model_len_used": 2048,
+ "note": "Heads trained on TriviaQA + PopQA train splits; thresholds/calibration chosen on validation."
+}

@@ -1,3 +1,11 @@
 *.md text eol=lf
 *.json text eol=lf
+*.jsonl text eol=lf
+*.py text eol=lf
+*.toml text eol=lf
+*.sh text eol=lf
+*.html text eol=lf
+*.svg text eol=lf
 *.png binary
+*.pdf binary
+*.pt binary

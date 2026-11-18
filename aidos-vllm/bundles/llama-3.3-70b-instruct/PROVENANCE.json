@@ -1,0 +1,26 @@
+{
+ "model": "unsloth/Llama-3.3-70B-Instruct",
+ "source_run": "v6_llama3.3_70b",
+ "exported": "2026-11-14 03:36:20",
+ "heads": {
+  "head_post.pt": "fa7f97098737da2a",
+  "head_pre.pt": "c191a8ff5276441a",
+  "head_know.pt": "07ca91a3d2194335",
+  "head_help.pt": "3ca03beea7cfa1c8",
+  "head_pre_rag.pt": "2b1e44ddd744271b",
+  "head_post_rag.pt": "214e7ceb2d197367",
+  "head_gain.pt": "d128fc24f5aec811",
+  "head_harm.pt": "bac895739df9d668"
+ },
+ "lams": [
+  0.1,
+  0.25,
+  0.5,
+  1.0,
+  2.0,
+  4.0
+ ],
+ "policy": "route-eu",
+ "max_model_len_used": 2048,
+ "note": "Heads trained on TriviaQA + PopQA train splits; thresholds/calibration chosen on validation."
+}

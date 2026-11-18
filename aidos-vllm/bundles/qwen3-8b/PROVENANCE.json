@@ -1,0 +1,26 @@
+{
+ "model": "Qwen/Qwen3-8B",
+ "source_run": "v7_qwen3_8b",
+ "exported": "2026-11-14 03:36:20",
+ "heads": {
+  "head_post.pt": "ea2c8903b2573056",
+  "head_pre.pt": "92d4290cb0b5199c",
+  "head_know.pt": "37f75245668ad49a",
+  "head_help.pt": "5688fd99aeb80caa",
+  "head_pre_rag.pt": "c0ea678da4381b6c",
+  "head_post_rag.pt": "d34f8547ef54058c",
+  "head_gain.pt": "24c89d12bd7f65c3",
+  "head_harm.pt": "bdce8bf7bf8b5f79"
+ },
+ "lams": [
+  0.1,
+  0.25,
+  0.5,
+  1.0,
+  2.0,
+  4.0
+ ],
+ "policy": "route-eu",
+ "max_model_len_used": 2048,
+ "note": "Heads trained on TriviaQA + PopQA train splits; thresholds/calibration chosen on validation."
+}
