@@ -19,12 +19,17 @@ vLLM internals lives in one module (`aidos/engine/compat.py`) checked by contrac
 ## Install
 
 ```bash
-pip install "aidos-vllm[bm25] @ git+https://github.com/belgium-waffle/aidos1#subdirectory=aidos-vllm"
+git clone https://github.com/belgium-waffle/aidos1
+cd aidos1/aidos-vllm
+pip install -e ".[bm25]"              # pins vllm 0.21.*; [bm25] adds BM25 over your own corpus
 aidos info                            # versions, and whether vLLM sees the plugin
+python examples/quickstart.py         # three example questions on a two-document corpus
 ```
 
-This pins vllm 0.21.*; `[bm25]` adds BM25 over your own corpus. From a clone:
-`pip install -e "aidos-vllm[bm25,dev]"`. (Not yet on PyPI.)
+The released head bundles live in `bundles/` in the clone, and the examples refer to them by that path. To install
+the plugin alone (for example with your own bundles):
+`pip install "aidos-vllm[bm25] @ git+https://github.com/belgium-waffle/aidos1#subdirectory=aidos-vllm"`.
+Not yet on PyPI.
 
 ## Quickstart
 

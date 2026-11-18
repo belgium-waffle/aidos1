@@ -24,19 +24,22 @@ This repository accompanies the system demonstration paper (under review).
 ## Install
 
 ```bash
-pip install "aidos-vllm[bm25] @ git+https://github.com/belgium-waffle/aidos1#subdirectory=aidos-vllm"
+git clone https://github.com/belgium-waffle/aidos1
+cd aidos1/aidos-vllm
+pip install -e ".[bm25]"
 aidos info
+python examples/quickstart.py
 ```
 
-Requires vLLM 0.21.x (pinned) and a CUDA GPU. Full usage, retrievers and the Python API:
-[aidos-vllm/README.md](aidos-vllm/README.md).
+Requires vLLM 0.21.x (pinned) and a CUDA GPU (tested on H100 and H200). The head bundles are in
+`aidos-vllm/bundles/` in the clone. Full usage, retrievers and the Python API: [aidos-vllm/README.md](aidos-vllm/README.md).
 
 ## Quick start
 
-Serve any of the released models behind vLLM's OpenAI-compatible API:
+From `aidos-vllm/`, serve any of the released models behind vLLM's OpenAI-compatible API:
 
 ```bash
-aidos config aidos-vllm/bundles/qwen2.5-7b-instruct --lam 1 --retriever my_corpus.jsonl \
+aidos config bundles/qwen2.5-7b-instruct --lam 1 --retriever my_corpus.jsonl \
     --status aidos_status.json -o aidos.json
 AIDOS_CONFIG=$PWD/aidos.json vllm serve Qwen/Qwen2.5-7B-Instruct \
     --scheduler-cls aidos.engine.scheduler.AidosScheduler --no-async-scheduling
@@ -50,7 +53,7 @@ Demo tools:
 ```bash
 aidos live --status aidos_status.json    # live view
 aidos lambda                             # cost explorer
-aidos verify --model Qwen/Qwen2.5-7B-Instruct --bundle aidos-vllm/bundles/qwen2.5-7b-instruct
+aidos verify --model Qwen/Qwen2.5-7B-Instruct --bundle bundles/qwen2.5-7b-instruct
 ```
 
 ## Released heads

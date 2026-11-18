@@ -1,7 +1,7 @@
 """Answer, retrieve or abstain inside vLLM, on your own documents.
 
-    pip install "aidos-vllm[bm25]"
-    python examples/quickstart.py
+    pip install -e ".[bm25]"        # from aidos-vllm/ in a clone of the repository
+    python examples/quickstart.py   # run from aidos-vllm/ so bundles/ resolves
 """
 import json
 from pathlib import Path
