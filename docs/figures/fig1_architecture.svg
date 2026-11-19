@@ -26,7 +26,7 @@
   <rect class="lane" x="20" y="60" width="330" height="485" rx="6"/>
   <text class="lab" x="36" y="82">WORKER (GPU): vLLM model runner</text>
   <rect class="lane" x="420" y="60" width="460" height="485" rx="6"/>
-  <text class="lab" x="436" y="82">ENGINE CORE (CPU): AidosScheduler</text>
+  <text class="lab" x="650" y="82" text-anchor="middle">ENGINE CORE (CPU): AidosScheduler</text>
 
   <!-- worker column -->
   <rect class="box" x="45" y="100" width="280" height="56" rx="4"/>

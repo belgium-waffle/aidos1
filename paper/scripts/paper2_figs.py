@@ -10,7 +10,7 @@ import json
 import sys
 from pathlib import Path
 
-OUT = Path(__file__).resolve().parent.parent / "figures"
+OUT = Path(__file__).resolve().parent.parent / "tripwire" / "docs" / "papers" / "figures"
 SETTINGS = [("goodput_overhead", "overhead check (sync baseline)"), ("goodput_cache_d0", "query cache, 0 ms"), ("goodput_cache_d50", "query cache, +50 ms"), ("goodput_live", "live BM25 (21M)")]
 COND = [("vanilla", "vLLM, closed-book"), ("vanilla_sync", "vLLM, closed-book, sync scheduling"), ("always_rag", "vLLM, always retrieve"), ("aidos_observe", "Aidos, scoring only"), ("aidos", "Aidos, λ = 1")]
 
@@ -102,15 +102,19 @@ def lamsweep(d):
     for ax, key, ylab, title in ((a, "accuracy", "accuracy", "(a) Answer quality"),
                                  (b, "goodput", "correct answers per second", "(b) Throughput (256 concurrent requests)")):
         ax.plot([r["hallucination"] for r in ai], [r[key] for r in ai], color=BLUE, lw=2, marker="o", ms=5, mec="white", mew=0.8,
-                label="Aidos (λ from 0.25 to 4)")
+                label=f"Aidos (λ from {ai[0]['lam']:g} to {ai[-1]['lam']:g})")
         for r in ai:
-            ax.annotate(f"λ={r['lam']:g}", (r["hallucination"], r[key]), textcoords="offset points", xytext=(6, -9), fontsize=6, color=INK2)
+            # in (b) the λ = 0.25 / 0.5 / 1 points sit within 0.5 correct/s of each other: label only the ends and λ = 1, 2
+            if key == "goodput" and r["lam"] not in (0.1, 1, 2, 4):
+                continue
+            ax.annotate(f"λ={r['lam']:g}", (r["hallucination"], r[key]), textcoords="offset points",
+                        xytext=(4, 5) if key == "goodput" else (6, -9), fontsize=6, color=INK2)
         ax.plot(rag["hallucination"], rag[key], "s", color=ORANGE, ms=6, mec="white", mew=0.8, label="vLLM, always retrieve")
         ax.set_xlabel("hallucination rate (wrong answers / questions)")
         ax.set_ylabel(ylab)
         ax.set_title(title, fontsize=8, loc="left")
         ax.grid(color=GRID, lw=0.6)
-        ax.set_xlim(0, 0.36)
+        ax.set_xlim(0, max(0.36, rag["hallucination"] + 0.05))
     a.legend(frameon=False, fontsize=6.5, loc="lower right")
     OUT.mkdir(parents=True, exist_ok=True)
     for ext in ("svg", "pdf", "png"):
