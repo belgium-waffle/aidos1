@@ -106,8 +106,9 @@ about 25%, and 6–21 times faster.</li>
 <li><b>Cheap to run:</b> 2–3% fewer requests per second than vLLM with the same scheduling (7B, 256 concurrent requests).</li>
 </ul>
 <img class="fig" src="figures/fig_lamsweep.png" alt="Accuracy and correct answers per second against hallucination rate for Aidos at several λ and for always-retrieve.">
-<p class="note">Throughput figure: Qwen2.5-7B, one H100, 256 concurrent requests, cached retrieval; measured on a 2,000-question test
-subset that over-represents TriviaQA (full-split numbers will replace it). Paper under review; source data in
+<p class="note">Throughput figure: Qwen2.5-7B, one H100, 256 concurrent requests, cached retrieval, full test split (3,176
+questions). At λ = 0.1 Aidos matches always-retrieve accuracy with 45% fewer hallucinations and 18% higher throughput.
+Paper under review; source data in
 <a href="{REPO}/tree/main/paper">paper/</a>.</p>
 """
     return page("Aidos", body, "Aidos: answer, retrieve or abstain from inside the vLLM decode loop. Live demos and code.")

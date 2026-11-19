@@ -93,11 +93,10 @@ from 7B to 70B. Source tables are in [paper/results](paper/results); see [paper/
 - **Overhead.** Per decoding step 1.8–2.9% at 32–70B and 9–10% at 7–8B. End to end at 7B: 2–3% fewer requests per
   second than vLLM with the same synchronous scheduling, plus about 5% from giving up vLLM's asynchronous
   scheduling.
-- **Serving throughput** (Qwen2.5-7B, one H100, 256 concurrent requests, cached retrieval): at λ = 1, a third more
-  requests per second than retrieving for every question, with a hallucination rate of 8% instead of 33%; at
-  λ = 0.25, within one point of always-retrieve accuracy at half its hallucination rate. *These throughput numbers
-  come from a 2,000-question test subset that over-represents TriviaQA; numbers on the full test split will
-  replace them.*
+- **Serving throughput** (Qwen2.5-7B, one H100, 256 concurrent requests, cached retrieval, full test split): against
+  retrieving for every question, Aidos at λ = 0.1 matches its accuracy (0.571 vs 0.568) with 45% fewer hallucinations
+  and 18% higher throughput; at λ = 1 it cuts hallucinations by 84% at 42% higher throughput. With 50 ms of retrieval
+  latency, always-retrieve loses a third of its throughput and Aidos none.
 
 ## Limitations
 
