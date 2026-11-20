@@ -31,6 +31,8 @@ Omit the last argument to replay the whole recording in a loop.
 | `results/serve_check/` | `vllm serve` with the README flags: config, server log, an OpenAI-style chat response (HTTP 200) and the status snapshot | `aidos config` + `vllm serve` + one `curl` request |
 | `results/live_view_recording/` | 37 status snapshots of a 64-question batch, the answers, and the runtime config | `examples/demo_capture.py` |
 | `results/goodput_full_test_split/` | Throughput and answer quality on the full test split (3,176 questions): `d0` at 32 / 128 / 256 concurrent requests (closed-book vLLM, always-retrieve, Aidos scoring-only, Aidos λ = 1); `lam` (λ = 0.1–4 at 256); `d50` (+50 ms per search); `live` (live BM25 over 21M passages); tables in the paper | `examples/goodput.py` |
+| `results/overhead_10k/` | Scoring overhead on 10,000 questions, three runs each: vLLM (async and sync scheduling) vs Aidos scoring-only at 32 and 256 concurrent requests | `examples/goodput.py` |
+| `results/fit_validation/` | `aidos fit` reports for Qwen2.5-7B (vs the released bundle) and Qwen2.5-3B (new model), and `aidos verify` with the fitted 3B bundle (all eight checks pass) | `aidos fit` + `aidos verify` |
 | `results/goodput_subset2000/` | Earlier runs on a 2,000-question subset (80% TriviaQA), incl. the overhead runs against vLLM with the same synchronous scheduling | `examples/goodput.py` |
 | `results/answer_quality/` | Utility against the five adaptive-retrieval pipelines on the test split (`audit_all_models.md`) and the sealed set (`sealed/`), with paired bootstrap intervals and Holm-corrected p-values | research pipeline |
 

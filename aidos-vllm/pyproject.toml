@@ -19,6 +19,7 @@ dependencies = [
 [project.optional-dependencies]
 bm25 = ["bm25s", "PyStemmer"]   # live BM25 over your own corpus or the DPR Wikipedia split
 rerank = []                       # cross-encoder reranking uses transformers (already required)
+fit = ["datasets", "accelerate"]   # aidos fit: default question sets, HF feature extraction
 dev = ["pytest"]
 
 # vLLM discovers this in every process it spawns (engine core + workers).

@@ -12,7 +12,8 @@ and acts on them in the scheduler:
 - **Exact:** insertion and rollback produce the same tokens as recomputing from scratch, including with tensor
   parallelism. `aidos verify` checks this on your own GPU and vLLM build.
 
-It is a plugin, not a fork: it does nothing unless `AIDOS_CONFIG` is set. Calibrated heads ship for six models.
+It is a plugin, not a fork: it does nothing unless `AIDOS_CONFIG` is set. Calibrated heads ship for six models,
+and `aidos fit` trains them for another model in about ten minutes on one GPU.
 
 This repository accompanies the system demonstration paper (under review).
 
@@ -69,8 +70,15 @@ aidos verify --model Qwen/Qwen2.5-7B-Instruct --bundle bundles/qwen2.5-7b-instru
 | `qwen2.5-32b-instruct` | Qwen/Qwen2.5-32B-Instruct |
 | `llama-3.3-70b-instruct` | meta-llama/Llama-3.3-70B-Instruct (tensor parallel 2) |
 | `qwen3-8b` | Qwen/Qwen3-8B (thinking off) |
+| `qwen2.5-3b-instruct` | Qwen/Qwen2.5-3B-Instruct (made by `aidos fit`; see below) |
 
 Each bundle is calibrated for λ ∈ {0.1, 0.25, 0.5, 1, 2, 4}.
+
+**Your own model:** `pip install -e ".[bm25,fit]"`, then
+`aidos fit --model M --retriever my_corpus.jsonl --out bundles/my-model` and
+`aidos verify --model M --bundle bundles/my-model`. On Qwen2.5-7B the fitted bundle matches the released one
+(head AUROC within 0.03, estimated utility at λ = 1 0.394 vs 0.392) after 11 minutes on one H100; details in
+[aidos-vllm/README.md](aidos-vllm/README.md#bring-your-own-model).
 
 ## Results in the paper
 
@@ -90,7 +98,7 @@ from 7B to 70B. Source tables are in [paper/results](paper/results); see [paper/
 - **Against reasoning models** told the same cost of an error: Aidos adapts how much it answers (wrong on 6.9% /
   3.8% / 1.7% of questions at λ = 1 / 2 / 4, against about 25% at every λ for Qwen3-8B with search) and answers
   6–21 times faster.
-- **Overhead.** Per decoding step 1.8–2.9% at 32–70B and 9–10% at 7–8B. End to end at 7B: 2–3% fewer requests per
+- **Overhead.** Per decoding step 1.8–2.9% at 32–70B and 9–10% at 7–8B. End to end at 7B: 2–4% fewer requests per
   second than vLLM with the same synchronous scheduling, plus about 5% from giving up vLLM's asynchronous
   scheduling.
 - **Serving throughput** (Qwen2.5-7B, one H100, 256 concurrent requests, cached retrieval, full test split): against

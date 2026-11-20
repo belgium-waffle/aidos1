@@ -1,6 +1,7 @@
 """aidos command line.
 
   aidos verify  --model M --bundle B          token-exactness tests on your GPU / vLLM build
+  aidos fit     --model M --retriever R --out B   train and calibrate a head bundle for your own model
   aidos config  B --lam 1 --retriever R -o F  write a runtime file for `AIDOS_CONFIG=F vllm serve ...`
   aidos live    --status F [--port 8765]      live view of request states and scores (browser)
   aidos lambda  [--data F] [--port 8766]      cost explorer: move lambda, watch coverage / errors
@@ -106,9 +107,14 @@ def main(argv=None) -> int:
         from .verify import main as verify_main
 
         return verify_main(argv[1:])
+    if argv and argv[0] == "fit":
+        from .fit import main as fit_main
+
+        return fit_main(argv[1:])
     ap = argparse.ArgumentParser(prog="aidos", description=__doc__.split("\n\n")[0])
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("verify", help="token-exactness tests (see aidos verify -h)")
+    sub.add_parser("fit", help="train and calibrate a head bundle for your own model (see aidos fit -h)")
     c = sub.add_parser("config", help="write a runtime file for vllm serve")
     c.add_argument("bundle")
     c.add_argument("--lam", type=float, default=1.0)

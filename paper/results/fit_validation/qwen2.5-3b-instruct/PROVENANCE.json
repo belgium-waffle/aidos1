@@ -1,0 +1,187 @@
+{
+ "model": "Qwen/Qwen2.5-3B-Instruct",
+ "created": "2026-11-20 12:43:57",
+ "made_by": "aidos fit",
+ "questions": "triviaqa=8000,popqa=8000",
+ "splits": {
+  "train": 7978,
+  "val": 2458,
+  "cal": 2348,
+  "test": 3216
+ },
+ "retriever": "retrieval.jsonl",
+ "layers": [
+  18,
+  22,
+  27
+ ],
+ "layer_sweep_val_auroc": {
+  "9": 0.8029302225778174,
+  "14": 0.8836190477774655,
+  "18": 0.904667962999619,
+  "22": 0.9094917853631922,
+  "27": 0.9141925170871432,
+  "32": 0.8947558397359872
+ },
+ "heads": {
+  "pre": {
+   "val_auroc": 0.87007283971769,
+   "test_auroc": 0.8619574550591363,
+   "n_test": 3205,
+   "tau": 0.8746400475502014,
+   "platt": [
+    0.9830925990702412,
+    1.2810212698850185
+   ]
+  },
+  "post": {
+   "val_auroc": 0.9204169113231745,
+   "test_auroc": 0.9199311930329603,
+   "n_test": 3205,
+   "tau": 0.8972035050392151,
+   "platt": [
+    0.9411844681662689,
+    0.5846669628444218
+   ]
+  },
+  "help": {
+   "val_auroc": 0.8084949633859825,
+   "test_auroc": 0.8136770254007252,
+   "n_test": 3205,
+   "tau": 0.604502260684967,
+   "platt": [
+    0.8029211701738141,
+    -0.11530346031700534
+   ]
+  },
+  "pre_rag": {
+   "val_auroc": 0.871522614002825,
+   "test_auroc": 0.8684821626464101,
+   "n_test": 3216,
+   "tau": 0.5608677864074707,
+   "platt": [
+    0.7857981256281887,
+    -0.10534937989734018
+   ]
+  },
+  "post_rag": {
+   "val_auroc": 0.8971082860264918,
+   "test_auroc": 0.8977258284755987,
+   "n_test": 3216,
+   "tau": 0.699363648891449,
+   "platt": [
+    0.8282023451141598,
+    0.029586313457299885
+   ]
+  }
+ },
+ "lams": [
+  0.1,
+  0.25,
+  0.5,
+  1.0,
+  2.0,
+  4.0
+ ],
+ "policy": "route-eu",
+ "max_model_len_used": 2048,
+ "offline_estimate_test": {
+  "0.1": {
+   "aidos": {
+    "n": 3216,
+    "accuracy": 0.5223880597014925,
+    "hallucination": 0.27300995024875624,
+    "abstain": 0.20460199004975124,
+    "retrieval_rate": 0.8833955223880597,
+    "utility": 0.4774191542288558
+   },
+   "closed_book": {
+    "utility": 0.21296641791044776
+   },
+   "always_retrieve": {
+    "utility": 0.4539427860696518
+   }
+  },
+  "0.25": {
+   "aidos": {
+    "n": 3216,
+    "accuracy": 0.5018656716417911,
+    "hallucination": 0.1868781094527363,
+    "abstain": 0.3112562189054726,
+    "retrieval_rate": 0.8777985074626866,
+    "utility": 0.43759017412935325
+   },
+   "closed_book": {
+    "utility": 0.10611007462686567
+   },
+   "always_retrieve": {
+    "utility": 0.38220771144278604
+   }
+  },
+  "0.5": {
+   "aidos": {
+    "n": 3216,
+    "accuracy": 0.46237562189054726,
+    "hallucination": 0.11753731343283583,
+    "abstain": 0.42008706467661694,
+    "retrieval_rate": 0.7534203980099502,
+    "utility": 0.3885385572139303
+   },
+   "closed_book": {
+    "utility": -0.07198383084577115
+   },
+   "always_retrieve": {
+    "utility": 0.2626492537313433
+   }
+  },
+  "1": {
+   "aidos": {
+    "n": 3216,
+    "accuracy": 0.4064054726368159,
+    "hallucination": 0.07058457711442787,
+    "abstain": 0.5230099502487562,
+    "retrieval_rate": 0.7195273631840796,
+    "utility": 0.3214303482587065
+   },
+   "closed_book": {
+    "utility": -0.4281716417910448
+   },
+   "always_retrieve": {
+    "utility": 0.023532338308457714
+   }
+  },
+  "2": {
+   "aidos": {
+    "n": 3216,
+    "accuracy": 0.32960199004975127,
+    "hallucination": 0.03949004975124378,
+    "abstain": 0.630907960199005,
+    "retrieval_rate": 0.7101990049751243,
+    "utility": 0.2364179104477612
+   },
+   "closed_book": {
+    "utility": -1.140547263681592
+   },
+   "always_retrieve": {
+    "utility": -0.45470149253731346
+   }
+  },
+  "4": {
+   "aidos": {
+    "n": 3216,
+    "accuracy": 0.23694029850746268,
+    "hallucination": 0.016791044776119403,
+    "abstain": 0.746268656716418,
+    "retrieval_rate": 0.6063432835820896,
+    "utility": 0.15764925373134328
+   },
+   "closed_book": {
+    "utility": -2.5652985074626864
+   },
+   "always_retrieve": {
+    "utility": -1.4111691542288558
+   }
+  }
+ },
+ "note": "Heads trained on the train split; layers, early stopping and Platt maps on val; conformal taus on cal; test is reported only. The estimate replays the engine's decision rules offline."
+}

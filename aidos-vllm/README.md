@@ -88,6 +88,24 @@ through `extra_args` (`aidos_query`) for cleaner retrieval.
 
 Retrieval runs in worker threads; the paused request keeps its batch slot and KV blocks.
 
+## Bring your own model
+
+```bash
+pip install -e ".[bm25,fit]"
+aidos fit --model Qwen/Qwen2.5-3B-Instruct --retriever my_corpus.jsonl --out bundles/my-model
+aidos verify --model Qwen/Qwen2.5-3B-Instruct --bundle bundles/my-model
+```
+
+`aidos fit` generates closed-book and evidence answers (TriviaQA and PopQA by default, or your own
+`--questions` file of `{"question", "answers": [...]}` lines), extracts the hidden-state rows the engine scores,
+sweeps layers on validation data, trains and calibrates the five heads, fits the per-λ policy tables and writes a
+bundle with a `REPORT.md` of held-out quality. Each stage is cached in `--work`, so an interrupted run resumes.
+
+Measured on one H100 (16,000 questions): Qwen2.5-7B in 11 minutes, heads' test AUROC 0.89 / 0.91 / 0.82 / 0.89 /
+0.90 against the released bundle's 0.89 / 0.92 / 0.83 / 0.90 / 0.93, estimated utility at λ = 1 0.394 against
+0.392; Qwen2.5-3B (no released bundle) in 6 minutes, and `aidos verify` passes with the fitted bundle. That bundle
+ships as `bundles/qwen2.5-3b-instruct`; reports in `paper/results/fit_validation/` of the repository.
+
 ## Demo tools
 
 ```bash
